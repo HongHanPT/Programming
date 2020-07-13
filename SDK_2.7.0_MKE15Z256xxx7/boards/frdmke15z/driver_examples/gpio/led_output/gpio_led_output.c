@@ -711,11 +711,12 @@ typedef struct Tree{
   char hold2;
   char press0;
 }MenuEntry;
-
+char x, y=1, M = 3;
 typedef struct  Mia_t MenuItem_t;
 struct Mia_t
 {
   char *name;
+  char number;
   MenuItem_t *parent;
   MenuItem_t *child;
   MenuItem_t *brother;
@@ -731,41 +732,83 @@ void show_menu_new()
   sendString("        ");
   HOME();
   sendString(root->name);
-  if(root->child!=NULL)
-  {
-    for(unsigned char i=2; i<=4; i++)
+  for(unsigned char i=2; i<=M+1; i++)
     {
       SelectLine(i);
       sendData(' ');
     }
+  if(root->child!=NULL)
+  {
     SelectLine(vitri+1);
     sendData(0x1A);
-    setPos(2,1);
     MenuItem_t *cusor1;
     cusor1 = root->child;
+    char i;
+    if (y-vitri +1 ==1) 
+    {
+        setPos(2,1);
+        sendString("                ");
+        setPos(2,1);
+        sendString(cusor1->name);
+        i=2;
+    }
+    else
+    {
+        for(char i =1; i< y-vitri +1;i++)
+        {
+          cusor1 = cusor1 -> brother; 
+        }
+        i=1;
+    }
+    while(cusor1 ->brother != NULL&& i<=M)
+        {
+          cusor1 = cusor1->brother;
+          i++;
+          setPos(i,1);
+          sendString("                ");
+          setPos(i,1);
+          sendString(cusor1->name);//Lan luot hien ten cua cac menu con
+        }
+    for (char j=i; j<M+1;j++)   //Xoa nhung dong k dung den
+        {
+          setPos(j+1,1);
+          sendString("                ");
+        }
+  }
+}
+///////////////
+/*
+if (y-x +1 ==1) 
+{
+setPos(2,1);
     sendString("                ");
     setPos(2,1);
     sendString(cusor1->name);
-    //sendString("        ");
-    char i=2;
-    while(cusor1->brother!= NULL)
+char i=2;
+}
+else{
+for(char i =1; i< y-x +1;i++)
+{
+  cusor1 = cusor1 -> brother; 
+}
+char i=1;
+}
+while(cusor1->brother!= NULL&& i<=M)
     {
-      cusor1 = cusor1->brother;
-      i++;
-      setPos(i,1);
+      setPos(i+1,1);
       sendString("                ");
-      setPos(i,1);
+      setPos(i+1,1);
       sendString(cusor1->name);//Lan luot hien ten cua cac menu con
-      //sendString("        ");
+      i++;
+      cusor1 = cusor1->brother;
     }
-    for (char j=i; j<4;j++)
+for (char j=i; j<4;j++)   //Xoa nhung dong k dung den
     {
       setPos(j+1,1);
       sendString("                ");
     }
-  }
-}
-
+*/
+///////////////////
 
 void browse_new()
 {
@@ -773,29 +816,37 @@ void browse_new()
   if (UP == 1)
   {
     UP=0;
-    if(vitri>1)
+    if(y>1)
     {
+      y--;
       vitri--;
+      if (y >1) vitri =2;
     }
   }
   if (DOWN == 1)
   {
     DOWN = 0;
-    if (vitri ==1) 
+    if (y ==1) 
     {
-      if(root ->child -> brother !=NULL) vitri++;
+      if(root ->child -> brother !=NULL)
+      {
+        y++;
+        vitri++;
+      }
     }
-    else if (vitri>1)
+    else if (y>1)
     {
       MenuItem_t *cusor2;
       cusor2 = root -> child;
-      for(unsigned char i=1;i<vitri; i++)
+      for(unsigned char i=1;i<y; i++)
       {
         cusor2 = cusor2->brother;
       }
       if(cusor2 -> brother !=NULL)
       {
+        y++;
         vitri++;
+        if (y<cusor2->parent->number) vitri=M-1;
       }
     }
   }
@@ -805,7 +856,7 @@ void browse_new()
     if (root ->child!= NULL)
     {
       root = root -> child;
-      for(unsigned char i=1;i<vitri; i++)
+      for(unsigned char i=1;i<y; i++)
       {
         root = root->brother;
       }
@@ -814,7 +865,11 @@ void browse_new()
         //root ->fnCallback;
         root = root ->parent;
       }
-      else vitri =1;
+      else 
+      {
+        y =1;
+        vitri =1;
+      }
     }
   }
   if (CANCEL == 1)
@@ -824,6 +879,8 @@ void browse_new()
     {
       root = root -> parent;
     }
+    y=1;
+    vitri =1;
   }
 }
 
@@ -846,6 +903,7 @@ void Add(MenuItem_t *root1, MenuItem_t *child1)
     p->brother = child1;
     child1 -> parent = root1;
   }
+  root1->number ++;
 
 }
 
@@ -935,7 +993,6 @@ void BrowseMenu()
 /*End Menu tree*/
 
 /*Test state machine*/
-char x=0,y=0;
 void eventPressA(unsigned char key)
 {
 /* 09/07 */
@@ -963,6 +1020,7 @@ void eventPressA(unsigned char key)
   }*/
   
   /* Afternoon 10/07*/
+  //browse_new();
   if (key == '7')
   {
     CANCEL = 1;
@@ -979,7 +1037,7 @@ void eventPressA(unsigned char key)
   {
     UP = 1;
   }
-  
+  //browse_new();
 }
 void eventHoldA(unsigned char key)
 {
@@ -1015,18 +1073,20 @@ void eventHoldA(unsigned char key)
  * @brief Main function
  */
 
-MenuItem_t Main = {.name= "Main"}; 
-MenuItem_t Menu1 = {.name= "Menu1"}; 
-MenuItem_t Menu2 = {.name= "Menu2"}; 
-MenuItem_t Menu11 = {.name= "A"}; 
-MenuItem_t Menu12 = {.name= "B"}; 
-MenuItem_t Menu21 = {.name= "C"}; 
-MenuItem_t Menu22 = {.name= "D"}; 
-MenuItem_t Menu111 = {.name= "E"}; 
-MenuItem_t Menu121 = {.name= "F"};
-MenuItem_t Menu122 = {.name= "G"}; 
+MenuItem_t Main = {.name= "Main", .number =0}; 
+MenuItem_t Menu1 = {.name= "Menu1", .number =0}; 
+MenuItem_t Menu2 = {.name= "Menu2", .number =0}; 
+MenuItem_t Menu11 = {.name= "A", .number =0}; 
+MenuItem_t Menu12 = {.name= "B", .number =0}; 
+MenuItem_t Menu13 = {.name= "C", .number =0}; 
+MenuItem_t Menu14 = {.name= "D", .number =0}; 
+MenuItem_t Menu21 = {.name= "C", .number =0}; 
+MenuItem_t Menu22 = {.name= "D", .number =0}; 
+MenuItem_t Menu111 = {.name= "E", .number =0}; 
+MenuItem_t Menu121 = {.name= "F", .number =0};
+MenuItem_t Menu122 = {.name= "G", .number =0}; 
 
-int main(void)
+  int main(void)
 {
     /* Define the init structure for the output LED pin*/
     gpio_pin_config_t out_config = {
@@ -1071,6 +1131,8 @@ int main(void)
     Add(&Main, &Menu2);
     Add(&Menu1, &Menu11);
     Add(&Menu1, &Menu12);
+    Add(&Menu1, &Menu13);
+    Add(&Menu1, &Menu14);
     Add(&Menu2, &Menu21);
     Add(&Menu2, &Menu22);
     Add(&Menu11, &Menu111);
@@ -1100,6 +1162,7 @@ int main(void)
 //    sendCommand(0xA0);
 //    sendCommand(0xA0);
     //CLEAR2();
+//    browse_new();
     while (1)
     {
         //CLEAR();
@@ -1109,7 +1172,10 @@ int main(void)
        buttonA.keyButton = 0;
        buttonA.keyButton = check_key(); 
        ButtonProcessEvent(&buttonA);
-       browse_new();
+//       if(check_key())
+//       {
+         browse_new();
+//       }
        //BrowseMenu();
     }
 }
