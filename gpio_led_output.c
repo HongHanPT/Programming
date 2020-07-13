@@ -34,6 +34,8 @@ char check_key(void);
  ******************************************************************************/
 unsigned char key[4][3] = {{'5','1','9'},{'7','3','#'},{'4','0','8'},{'6','2','*'}};
 volatile uint32_t g_systickCounter=0;
+char selected =0;
+char PRESS1, PRESS2, HOLD1, HOLD2, PRESS0;
 /*******************************************************************************
  * Code
  ******************************************************************************/
@@ -695,57 +697,206 @@ void setPos(unsigned int x, int y)
   }
   sendCommand(instruction);
 }
-typedef enum
+
+
+
+
+/*Menu tree-----------------------------------------------------------*/
+/////////////////////////////////////////////////////////////////////////////////
+typedef struct Tree{
+  char *text;
+  char press1;
+  char press2;
+  char hold1;
+  char hold2;
+  char press0;
+}MenuEntry;
+
+typedef struct  Mia_t MenuItem_t;
+struct Mia_t
 {
-    Menu0 = 0,
-    Menu1,
-    Menu2,
-    Menu3,
-    Menu4,
-}Menu;
-/*Menu tree-----------------------------------------------------------
-void action(char menu)
+  char *name;
+  MenuItem_t *parent;
+  MenuItem_t *child;
+  MenuItem_t *brother;
+  void(*fnCallback);
+};
+MenuItem_t *root;
+
+char UP, DOWN, ENTER, CANCEL, vitri=1;
+void show_menu_new()
 {
-  if(menu == Menu0)
+  HOME();
+  sendString(root->name);
+  if(root->child!=NULL)
   {
-    CLEAR();
-    sendString("Easy menu");
-    if (keyButton == '1'|| keyButton == '4' || keyButton == '7' || keyButton == '*' )
+    SelectLine(vitri+1);
+    sendData(0x1A);
+    setPos(2,1);
+    MenuItem_t *cusor1;
+    cusor1 = root->child;
+    sendString(cusor1->name);
+    char i=2;
+    while(cusor1->brother!= NULL)
     {
-      action(Menu1);
+      cusor1 = cusor1->brother;
+      i++;
+      setPos(i,1);
+      sendString(cusor1->name);//Lan luot hien ten cua cac menu con
     }
-  }
-  if (keyButton == 4 || keyButton == 2 || keyButton == 3)
-    {
-      action(Menu1);
-    }
-}
-void UpdateMenu(char menu)
-{
-  switch(menu)
-  {
-  case Menu0: 
-    {
-      action(menu);
-      break;
-    }
-  case Menu1: 
-    {
-    }
-  case Menu2:
-    {
-    }
-   break; 
   }
 }
 
-End Menu tree*/
+
+void browse_new()
+{
+  show_menu_new();
+  if (UP == 1)
+  {
+    UP=0;
+    if(vitri>1)
+    {
+      vitri--;
+    }
+  }
+  if (DOWN == 1)
+  {
+    DOWN = 0;
+    if(root ->child -> brother !=NULL)
+    {
+      vitri++;
+    }
+  }
+  if (ENTER == 1)
+  {
+    ENTER =0;
+    root = root -> child;
+    for(unsigned char i=0;i<vitri; i++)
+    {
+      root = root->brother;
+    }
+    vitri =0;
+  }
+  if (CANCEL == 1)
+  {
+    CANCEL = 0;
+    root = root -> parent;
+  }
+}
+
+void Add(MenuItem_t *root1, MenuItem_t *child1)
+{
+  if(root1 -> child == NULL)
+  {
+    root1 ->   child = child1;
+    child1 -> parent = root1;
+  }
+  
+  else
+  {
+    MenuItem_t *p;
+    p= root1 -> child;
+    while(p->brother!=NULL)
+    {
+      p= p-> brother;
+    }
+    p->brother = child1;
+    child1 -> parent = root1;
+  }
+
+}
+
+MenuEntry Menu[]=
+{
+  {"Main", 1, 2, 3, 4, 0},                //0
+  {"Sub1", 5, 5, 1, 1, 0},                //1
+  {"Sub2", 2, 2, 2, 2, 0},                //2
+  {"Sub3", 3, 3, 3, 3, 0},                //3
+  {"Sub4", 4, 4, 4, 4, 0},                 //4
+  {"Sub1_1",5, 5, 5, 5, 0}
+};
+
+void ShowMenu()
+{
+  HOME();
+  //CLEAR();
+  sendString(Menu[selected].text);
+  if(selected == 0)
+  {
+      SelectLine(2);
+      sendString("Press OR HOLD");
+      SelectLine(3);
+      sendString("1 OR 2");
+  }
+  if(selected == 1)
+  {
+      SelectLine(2);
+      sendString("Pressed1");
+      SelectLine(3);
+      sendString("Press 0 to back");
+  }
+  if(selected == 2)
+  {
+      SelectLine(2);
+      sendString("Pressed2");
+      SelectLine(3);
+      sendString("Press 0 to back");
+  }
+  if(selected == 3)
+  {
+      SelectLine(2);
+      sendString("Holded1");
+      SelectLine(3);
+      sendString("Press 0 to back");
+  }
+  if(selected == 4)
+  {
+      SelectLine(2);
+      sendString("Holded2");
+      SelectLine(3);
+      sendString("Press 0 to back");
+  }
+}
+
+void BrowseMenu()
+{
+    ShowMenu();
+    if(PRESS1)
+    {
+      selected = Menu[selected].press1;
+      PRESS1 =0;
+    }
+    if(PRESS2)
+    {
+      selected = Menu[selected].press2;
+      PRESS2=0;
+    }
+    if(HOLD1)
+    {
+      selected = Menu[selected].hold1;
+      HOLD1 = 0;
+    }
+    if(HOLD2)
+    {
+      selected = Menu[selected].hold2;
+      HOLD2=0;
+    }
+    if(PRESS0)
+    {
+      selected = Menu[selected].press0;
+      PRESS0=0;
+    }
+    
+}
+                        
+/*End Menu tree*/
 
 /*Test state machine*/
 char x=0,y=0;
 void eventPressA(unsigned char key)
 {
-    if(key)
+/* 09/07 */
+  if(key)
     {
       Graphic_Off();
       CLEAR();
@@ -753,9 +904,43 @@ void eventPressA(unsigned char key)
       sendData(key);
       sendData('-');
     }
+ /////////////////////////
+ /* 10/07*/
+/*  if (key == '1')
+  {
+    PRESS1 = 1;
+  }
+  if (key == '2')
+  {
+    PRESS2 = 1;
+  }
+    if (key == '0')
+  {
+    PRESS0 = 1;
+  }*/
+  
+  /* Afternoon 10/07*/
+  if (key == '*')
+  {
+    CANCEL = 1;
+  }
+  if (key == '#')
+  {
+    ENTER = 1;
+  }
+    if (key == '0')
+  {
+    DOWN = 1;
+  }
+      if (key == '8')
+  {
+    UP = 1;
+  }
+  
 }
 void eventHoldA(unsigned char key)
 {
+  /* 09/07 */
   if(key)
   {
    HOME();
@@ -768,11 +953,36 @@ void eventHoldA(unsigned char key)
 //    y++;
    // DrawBitmap(Untitled);
   }
+  
+  
+  
+   /////////////////////////
+ /* 10/07*/
+    if (key == '1')
+  {
+    HOLD1 = 1;
+  }
+  if (key == '2')
+  {
+    HOLD2 = 1;
+  }
 }
 /* ------------------------------- */
 /*!
  * @brief Main function
  */
+
+MenuItem_t Main = {.name= "Main"}; 
+MenuItem_t Menu1 = {.name= "Menu1"}; 
+MenuItem_t Menu2 = {.name= "Menu2"}; 
+MenuItem_t Menu11 = {.name= "A"}; 
+MenuItem_t Menu12 = {.name= "B"}; 
+MenuItem_t Menu21 = {.name= "C"}; 
+MenuItem_t Menu22 = {.name= "D"}; 
+MenuItem_t Menu111 = {.name= "E"}; 
+MenuItem_t Menu121 = {.name= "F"};
+MenuItem_t Menu122 = {.name= "G"}; 
+
 int main(void)
 {
     /* Define the init structure for the output LED pin*/
@@ -811,15 +1021,25 @@ int main(void)
     GPIO_PinInit(GPIOD, 5U, &in_config);        /*Row4 button*/
     
     Init_LCD();
-//    Graphic_Off();
+    Graphic_Off();
+    sendData('0');
     CLEAR();
-    GraphicMode();
+    Add(&Main, &Menu1);
+    Add(&Main, &Menu2);
+    Add(&Menu1, &Menu11);
+    Add(&Menu1, &Menu12);
+    Add(&Menu2, &Menu21);
+    Add(&Menu2, &Menu21);
+    Add(&Menu11, &Menu111);
+    Add(&Menu12, &Menu121);
+    Add(&Menu12, &Menu122);
+ //   GraphicMode();
 
     //CLEAR2();
 //    HOME();
 //    sendData('0');
     Display_Status(0x0C);
-    DrawBitmap(Untitled);
+//    DrawBitmap(Untitled);
     BUTTON buttonA = 
     {
       .state = IDLE,		      
@@ -833,18 +1053,20 @@ int main(void)
         {
         }
     }
-    sendCommand(0xA0);
-    sendCommand(0xA0);
+    root = &Main;
+//    sendCommand(0xA0);
+//    sendCommand(0xA0);
     //CLEAR2();
     while (1)
     {
         //CLEAR();
-       sendData(0xFF);
-       sendData(0xFF);
+
        delay(1);
 //        unsigned char key1=0;
        buttonA.keyButton = 0;
        buttonA.keyButton = check_key(); 
        ButtonProcessEvent(&buttonA);
+       browse_new();
+       //BrowseMenu();
     }
 }
