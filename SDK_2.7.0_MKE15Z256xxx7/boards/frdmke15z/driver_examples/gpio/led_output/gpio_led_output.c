@@ -750,6 +750,7 @@ void show_menu_new()
         sendString("                ");
         setPos(2,1);
         sendString(cusor1->name);
+        cusor1 = cusor1->brother;
         i=2;
     }
     else
@@ -760,19 +761,20 @@ void show_menu_new()
         }
         i=1;
     }
-    while(cusor1 ->brother != NULL&& i<=M)
+    while(cusor1!= NULL&& i<=M)
         {
-          cusor1 = cusor1->brother;
+          
           i++;
           setPos(i,1);
-          sendString("                ");
+          sendString("              ");
           setPos(i,1);
           sendString(cusor1->name);//Lan luot hien ten cua cac menu con
+          cusor1 = cusor1->brother;
         }
     for (char j=i; j<M+1;j++)   //Xoa nhung dong k dung den
         {
           setPos(j+1,1);
-          sendString("                ");
+          sendString("              ");
         }
   }
 }
@@ -826,15 +828,15 @@ void browse_new()
   if (DOWN == 1)
   {
     DOWN = 0;
-    if (y ==1) 
-    {
-      if(root ->child -> brother !=NULL)
-      {
-        y++;
-        vitri++;
-      }
-    }
-    else if (y>1)
+//    if (y ==1) 
+//    {
+//      if(root ->child -> brother !=NULL)
+//      {
+//        y++;
+//        vitri++;
+//      }
+//    }
+//    else if (y>1)
     {
       MenuItem_t *cusor2;
       cusor2 = root -> child;
