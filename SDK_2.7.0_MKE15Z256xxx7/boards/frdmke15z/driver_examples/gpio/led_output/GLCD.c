@@ -452,30 +452,30 @@ MenuItem_t *root;
  */
 void show_menu_new()
 {
-  HOME();
-  sendString("                ");
-  HOME();
-  sendString(root->name);
-  for(unsigned char i=2; i<=maxShowedMenu+1; i++)
+//  HOME();
+//  sendString("                ");
+//  HOME();
+//  sendString(root->name);
+  for(unsigned char i=1; i<=maxShowedMenu; i++)
     {
       SelectLine(i);
       sendData(' ');
     }
   if(root->child!=NULL)
   {
-    SelectLine(arrowPos+1);
+    SelectLine(arrowPos);
     sendData(0x1A);
     MenuItem_t *cusor1;
     cusor1 = root->child;
     char i;
     if (menuPos-arrowPos +1 ==1) 
     {
-        setPos(2,1);
-        sendString("                ");
-        setPos(2,1);
+        setPos(1,1);
+        sendString("              ");
+        setPos(1,1);
         sendString(cusor1->name);
         cusor1 = cusor1->brother;
-        i=2;
+        i=1;
     }
     else
     {
@@ -483,9 +483,9 @@ void show_menu_new()
         {
           cusor1 = cusor1 -> brother; 
         }
-        i=1;
+        i=0;
     }
-    while(cusor1!= NULL&& i<=maxShowedMenu)
+    while(cusor1!= NULL&& i< maxShowedMenu)
         {
           
           i++;
@@ -495,9 +495,10 @@ void show_menu_new()
           sendString(cusor1->name);//Lan luot hien ten cua M sub_menu from (vi tri hien tai - vi tri mui ten)
           cusor1 = cusor1->brother;
         }
-    for (char j=i; j<maxShowedMenu+1;j++)   //Xoa nhung dong k dung den
+    i++;
+    for (char j=i; j<=maxShowedMenu;j++)   //Xoa nhung dong k dung den
         {
-          setPos(j+1,1);
+          setPos(j,1);
           sendString("              ");
         }
   }
@@ -513,15 +514,22 @@ void show_menu_new()
 void browse_new(MenuItem_t *rootMenu)
 {
   if(root==NULL) root = rootMenu;
-  show_menu_new();
   if (BUTTON_UP == ON)
   {
     BUTTON_UP = OFF;
     if(menuPos>1)
     {
       menuPos--;
-      arrowPos--;
-      if (menuPos >1) arrowPos =2;
+      if(arrowPos>2)
+      {
+        arrowPos--;
+      }
+      if (menuPos == 1) arrowPos =1;
+    }
+    else
+    {
+      menuPos= root ->number;
+      arrowPos = maxShowedMenu;
     }
   }
   if (BUTTON_DOWN == ON)
@@ -537,8 +545,20 @@ void browse_new(MenuItem_t *rootMenu)
       if(cusor2 -> brother !=NULL)
       {
         menuPos++;
-        arrowPos++;
-        if (menuPos<cusor2->parent->number) arrowPos=maxShowedMenu-1;
+        if (arrowPos <maxShowedMenu-1)
+        {
+          arrowPos++;
+        }
+        
+        if ((menuPos==cusor2->parent->number)&&(cusor2->parent->number>maxShowedMenu)) 
+        {
+          arrowPos=maxShowedMenu;
+        }
+      }
+      else 
+      {
+        menuPos= 1;
+        arrowPos = 1;
       }
     }
   }
@@ -574,6 +594,7 @@ void browse_new(MenuItem_t *rootMenu)
     menuPos=1;
     arrowPos =1;
   }
+   show_menu_new();
 }
 
 /**

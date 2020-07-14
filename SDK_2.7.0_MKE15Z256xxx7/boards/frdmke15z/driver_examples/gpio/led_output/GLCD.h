@@ -126,87 +126,13 @@ void HOME();
 void CLEAR();
 void CLEAR2();
 void ENTRY_MODE_SET();
-
-/**
- * @brief    Initializes modbus with according to parameters specified in structure
- * @note
- * 
- * @param    NONE
- * @retval   LCD status 
- */
 void Display(display_t Type_display);
-
-/**
- * @brief    Initializes modbus with according to parameters specified in structure
- * @note
- * 
- * @param    NONE
- * @retval   LCD status 
- */
 void sendString(char *String);
-
-/**
- * @brief    Initializes modbus with according to parameters specified in structure
- * @note
- * 
- * @param    NONE
- * @retval   LCD status 
- */
 void Graphic_Off();
-
-/**
- * @brief    Initializes modbus with according to parameters specified in structure
- * @note
- * 
- * @param    NONE
- * @retval   LCD status 
- */
 void setPos(unsigned int x, int y);
-
-/**
- * @brief    Initializes modbus with according to parameters specified in structure
- * @note
- * 
- * @param    NONE
- * @retval   LCD status 
- */
 void show_menu_new();
-
-/**
- * @brief    Initializes modbus with according to parameters specified in structure
- * @note
- * 
- * @param    NONE
- * @retval   LCD status 
- */
 void browse_new(MenuItem_t *rootMenu);
-
-/**
- * @brief    Initializes modbus with according to parameters specified in structure
- * @note
- * 
- * @param    NONE
- * @retval   LCD status 
- */
 void Add(MenuItem_t *root1, MenuItem_t *child1);
-
-/**
- * @brief    Initializes modbus with according to parameters specified in structure
- * @note
- * 
- * @param    NONE
- * @retval   LCD status 
- */
 void ShowMenu();
-
-/**
- * @brief    Initializes modbus with according to parameters specified in structure
- * @note
- * 
- * @param    NONE
- * @retval   LCD status 
- */
 void BrowseMenu();
-
-
 #endif /* _GLCD_H_ */
