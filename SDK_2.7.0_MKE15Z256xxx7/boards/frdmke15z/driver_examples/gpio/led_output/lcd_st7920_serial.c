@@ -149,6 +149,8 @@ void LCD_GraphicMode(graphic_state_t state)
 
 	else if (state == DISABLE)
 	{
+                LCD_SendCmd(0x3E);
+                delay(1);
 		LCD_SendCmd(0x30);  // 8 bit mode
 		delay(1);
 		graphicCheck = DISABLE;  // update the variable
@@ -605,7 +607,12 @@ static void LCD_ShowMenu()
  */
 void LCD_BrowseMenu(MenuItem_t *rootMenu, update_browse_t isUpdateBrowse)
 {
-  if((root==NULL)|| (isUpdateBrowse == YES_UPDATE)) root = rootMenu;
+  if((root==NULL)|| (isUpdateBrowse == YES_UPDATE)) 
+  {
+      root = rootMenu;
+      menuPos=1;
+      arrowPos=1;
+  }
   if (BUTTON_UP == ON)
   {
       BUTTON_UP = OFF;
@@ -675,6 +682,10 @@ void LCD_BrowseMenu(MenuItem_t *rootMenu, update_browse_t isUpdateBrowse)
           }
           else 
           {
+            if (root ->fnCallback != NULL) 
+            {
+              root ->fnCallback();
+            }
             menuPos =1;
             arrowPos =1;
           }
@@ -691,8 +702,8 @@ void LCD_BrowseMenu(MenuItem_t *rootMenu, update_browse_t isUpdateBrowse)
       menuPos=1;
       arrowPos =1;
   }
-  
   LCD_ShowMenu();
+  
 }
 
 /**

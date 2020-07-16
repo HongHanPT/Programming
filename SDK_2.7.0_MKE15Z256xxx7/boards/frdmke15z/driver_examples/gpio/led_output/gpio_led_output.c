@@ -72,7 +72,33 @@ char UP, DOWN, ENTER, ENTER2, CANCEL;
 /*Function CallBack*/
 void eventPressA(unsigned char key);
 void eventHoldA(unsigned char key);
-void fn1(void);
+
+void fn11(void);
+void fn12(void);
+void fn13(void);
+
+void fn21(void);
+void fn22(void);
+void fn23(void);
+
+void fn31(void);
+void fn32(void);
+void fn33(void);
+void fn34(void);
+
+void fn111(void);
+void fn121(void);
+void fn131(void);
+
+void fn211(void);
+void fn221(void);
+void fn231(void);
+
+void fn311(void);
+void fn321(void);
+void fn331(void);
+void fn341(void);
+
 /* ------------------------------- */
 /*!
  * @brief Main function
@@ -83,33 +109,197 @@ MenuItem_t Menu1 = {.name= "Tong doanh thu", .size =0};
 MenuItem_t Menu2 = {.name= "Menh gia nhan", .size =0}; 
 MenuItem_t Menu3 = {.name= "Menh gia tra", .size =0}; 
 
-MenuItem_t Menu11 = {.name= "Doanh thu ngay", .size =0}; 
-MenuItem_t Menu12 = {.name= "Doanh thu thang", .size =0}; 
-MenuItem_t Menu13 = {.name= "Doanh thu nam", .size =0}; 
+MenuItem_t Menu11 = {.name= "Doanh thu ngay", .size =0, .fnCallback = fn11}; 
+MenuItem_t Menu12 = {.name= "Doanh thu thang", .size =0, .fnCallback = fn12}; 
+MenuItem_t Menu13 = {.name= "Doanh thu nam", .size =0, .fnCallback = fn13}; 
 
-MenuItem_t Menu21 = {.name= "Gia tri lon nhat", .size =0}; 
-MenuItem_t Menu22 = {.name= "Gia tri nho nhat", .size =0}; 
-MenuItem_t Menu23 = {.name= "Chon menh gia", .size =0};
+MenuItem_t Menu21 = {.name= "Gia tri lon nhat", .size =0, .fnCallback = fn21}; 
+MenuItem_t Menu22 = {.name= "Gia tri nho nhat", .size =0, .fnCallback = fn22}; 
+MenuItem_t Menu23 = {.name= "Chon menh gia", .size =0, .fnCallback = fn23};
 
-MenuItem_t Menu31 = {.name= "Gia tri tra", .size =0}; 
-MenuItem_t Menu32 = {.name= "Bat/Tat", .size =0}; 
-MenuItem_t Menu33 = {.name= "Empty", .size =0};
-MenuItem_t Menu34 = {.name= "Full", .size =0};
+MenuItem_t Menu31 = {.name= "Gia tri tra", .size =0, .fnCallback = fn31}; 
+MenuItem_t Menu32 = {.name= "Bat/Tat", .size =0, .fnCallback = fn32}; 
+MenuItem_t Menu33 = {.name= "Empty", .size =0, .fnCallback = fn33};
+MenuItem_t Menu34 = {.name= "Full", .size =0, .fnCallback = fn34};
 
-MenuItem_t Menu111 = {.name= "Thread1", .size =0, .fnCallback = fn1}; 
-MenuItem_t Menu121 = {.name= "Thread2", .size =0};
-MenuItem_t Menu131 = {.name= "Thread3", .size =0}; 
+MenuItem_t Menu111 = {.name= "Thread1", .size =0, .fnCallback = fn111}; 
+MenuItem_t Menu121 = {.name= "Thread2", .size =0, .fnCallback = fn121};
+MenuItem_t Menu131 = {.name= "Thread3", .size =0, .fnCallback = fn131}; 
 
-MenuItem_t Menu211 = {.name= "Thread4", .size =0}; 
-MenuItem_t Menu221 = {.name= "Thread5", .size =0};
-MenuItem_t Menu231 = {.name= "Thread6", .size =0};
+MenuItem_t Menu211 = {.name= "Thread4", .size =0, .fnCallback = fn211}; 
+MenuItem_t Menu221 = {.name= "Thread5", .size =0, .fnCallback = fn221};
+MenuItem_t Menu231 = {.name= "Thread6", .size =0, .fnCallback = fn231};
 
-MenuItem_t Menu311 = {.name= "Thread7", .size =0}; 
-MenuItem_t Menu321 = {.name= "Thread8", .size =0};
-MenuItem_t Menu331 = {.name= "Thread9", .size =0};
-MenuItem_t Menu341 = {.name= "Thread10", .size =0};
+MenuItem_t Menu311 = {.name= "Thread7", .size =0, .fnCallback = fn311}; 
+MenuItem_t Menu321 = {.name= "Thread8", .size =0, .fnCallback = fn321};
+MenuItem_t Menu331 = {.name= "Thread9", .size =0, .fnCallback = fn331};
+MenuItem_t Menu341 = {.name= "Thread10", .size =0, .fnCallback = fn341};
 
-void fn1(void)
+char pass[10];
+void fn11(void)
+{
+  LCD_Clear();
+  LCD_SendString("    Thread11");
+  LCD_SelectLine(2);
+  LCD_SendString("Back to home");
+  delay(60000);
+  LCD_SendData('.');
+  delay(60000);
+  LCD_SendData('.');
+  delay(60000);
+  LCD_SendData('.');
+  delay(60000);
+  LCD_BrowseMenu(&Main, YES_UPDATE);
+}
+
+void fn12(void)
+{
+  LCD_Clear();
+  LCD_SendString("    Thread12");
+  LCD_SelectLine(2);
+  LCD_SendString("Back to home");
+  delay(60000);
+  LCD_SendData('.');
+  delay(60000);
+  LCD_SendData('.');
+  delay(60000);
+  LCD_SendData('.');
+  delay(60000);
+  LCD_BrowseMenu(&Main, YES_UPDATE);
+}
+
+void fn13(void)
+{
+  LCD_Clear();
+  LCD_SendString("    Thread13");
+  LCD_SelectLine(2);
+  LCD_SendString("Back to home");
+  delay(60000);
+  LCD_SendData('.');
+  delay(60000);
+  LCD_SendData('.');
+  delay(60000);
+  LCD_SendData('.');
+  delay(60000);
+  LCD_BrowseMenu(&Main, YES_UPDATE);
+}
+
+
+void fn21(void)
+{
+  LCD_Clear();
+  LCD_SendString("Thread21");
+  LCD_SendString("Back to home");
+  delay(2000);
+  LCD_SendData('.');
+  delay(2000);
+  LCD_SendData('.');
+  delay(2000);
+  LCD_SendData('.');
+  delay(2000);
+  LCD_BrowseMenu(&Main, YES_UPDATE);
+}
+
+void fn22(void)
+{
+  LCD_Clear();
+  LCD_SendString("Thread22");
+  LCD_SendString("Back to home");
+  delay(200);
+  LCD_SendData('.');
+  delay(200);
+  LCD_SendData('.');
+  delay(200);
+  LCD_SendData('.');
+  delay(200);
+  LCD_BrowseMenu(&Main, YES_UPDATE);
+}
+void fn23(void)
+{
+  LCD_Clear();
+  LCD_SendString("Thread23");
+  LCD_SendString("Back to home");
+  delay(200);
+  LCD_SendData('.');
+  delay(200);
+  LCD_SendData('.');
+  delay(200);
+  LCD_SendData('.');
+  delay(200);
+  LCD_BrowseMenu(&Main, YES_UPDATE);
+}
+
+
+void fn31(void)
+{
+  LCD_Clear();
+  LCD_SendString("Thread31");
+  LCD_SendString("Back to home");
+  delay(2000);
+  LCD_SendData('.');
+  delay(2000);
+  LCD_SendData('.');
+  delay(2000);
+  LCD_SendData('.');
+  delay(2000);
+  LCD_BrowseMenu(&Main, YES_UPDATE);
+}
+
+void fn32(void)
+{
+  LCD_Clear();
+  LCD_SendString("Thread32");
+  LCD_SendString("Back to home");
+  delay(2000);
+  LCD_SendData('.');
+  delay(2000);
+  LCD_SendData('.');
+  delay(2000);
+  LCD_SendData('.');
+  delay(2000);
+  LCD_BrowseMenu(&Main, YES_UPDATE);
+}
+
+void fn33(void)
+{
+  LCD_Clear();
+  LCD_SendString("    Thread33");
+  LCD_SelectLine(2);
+  LCD_SendString("Back to home");
+  delay(60000);
+  LCD_SendData('.');
+  delay(60000);
+  LCD_SendData('.');
+  delay(60000);
+  LCD_SendData('.');
+  delay(60000);
+  //LCD_BrowseMenu(&Main, YES_UPDATE);
+  LCD_Clear();
+  LCD_SendString("   :D");
+  delay(80000);
+}
+
+void fn34(void)
+{
+  LCD_Clear();
+  LCD_SendString("    Thread34");
+  LCD_SelectLine(2);
+  LCD_SendString("Back to home");
+  delay(60000);
+  LCD_SendData('.');
+  delay(60000);
+  LCD_SendData('.');
+  delay(60000);
+  LCD_SendData('.');
+  delay(60000);
+  //LCD_BrowseMenu(&Main, YES_UPDATE);
+  LCD_Clear();
+  LCD_SendString("   :D");
+  delay(80000);
+}
+
+
+void fn111(void)
 {
   LCD_Clear();
   if (ENTER2 ==1) 
@@ -118,6 +308,99 @@ void fn1(void)
       ENTER2 =0;
   }
 }
+
+void fn121(void)
+{
+  LCD_Clear();
+  if (ENTER2 ==1) 
+  {
+      LCD_BrowseMenu(&Main, YES_UPDATE);
+      ENTER2 =0;
+  }
+}
+
+void fn131(void)
+{
+  LCD_Clear();
+  if (ENTER2 ==1) 
+  {
+      LCD_BrowseMenu(&Main, YES_UPDATE);
+      ENTER2 =0;
+  }
+}
+
+
+void fn211(void)
+{
+  LCD_Clear();
+  if (ENTER2 ==1) 
+  {
+      LCD_BrowseMenu(&Main, YES_UPDATE);
+      ENTER2 =0;
+  }
+}
+
+void fn221(void)
+{
+  LCD_Clear();
+  if (ENTER2 ==1) 
+  {
+      LCD_BrowseMenu(&Main, YES_UPDATE);
+      ENTER2 =0;
+  }
+}
+
+void fn231(void)
+{
+  LCD_Clear();
+  if (ENTER2 ==1) 
+  {
+      LCD_BrowseMenu(&Main, YES_UPDATE);
+      ENTER2 =0;
+  }
+}
+
+
+void fn311(void)
+{
+  LCD_Clear();
+  if (ENTER2 ==1) 
+  {
+      LCD_BrowseMenu(&Main, YES_UPDATE);
+      ENTER2 =0;
+  }
+}
+
+void fn321(void)
+{
+  LCD_Clear();
+  if (ENTER2 ==1) 
+  {
+      LCD_BrowseMenu(&Main, YES_UPDATE);
+      ENTER2 =0;
+  }
+}
+
+void fn331(void)
+{
+  LCD_Clear();
+  if (ENTER2 ==1) 
+  {
+      LCD_BrowseMenu(&Main, NO_UPDATE);
+      ENTER2 =0;
+  }
+}
+
+void fn341(void)
+{
+  LCD_Clear();
+  if (ENTER2 ==1) 
+  {
+      LCD_BrowseMenu(&Main, NO_UPDATE);
+      ENTER2 =0;
+  }
+}
+
 //MenuItem_t *root;
 button_t buttonA = 
 {
@@ -224,9 +507,9 @@ int main(void)
     LCD_AddSubMenu2Menu(&Menu32, &Menu321);
     LCD_AddSubMenu2Menu(&Menu33, &Menu331);
     LCD_AddSubMenu2Menu(&Menu33, &Menu341);
-    
+        
     LCD_InitSignalControl(&ENTER, &UP, &DOWN, &CANCEL);
-    LCD_SetMaxShowedMenu(3);
+    LCD_SetMaxShowedMenu(4);
  //   GraphicMode();
 
     //CLEAR2();
@@ -305,7 +588,6 @@ void eventPressA(unsigned char key)
     UP = 1;
   }
   LCD_BrowseMenu(&Main, NO_UPDATE);
-  printf("a");
 }
 
 void eventHoldA(unsigned char key)
@@ -327,6 +609,4 @@ void eventHoldA(unsigned char key)
   {
     HOLD2 = 1;
   }
-  //15/07
-  printf("a");
 }
