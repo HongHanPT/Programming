@@ -12,6 +12,8 @@
 #include "pin_mux.h"
 #include "clock_config.h"
 #include "string.h"
+
+#include "module_sim_800c.h"
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
@@ -26,9 +28,6 @@
  * Prototypes
  ******************************************************************************/
 
-/* LPUART user callback */
-void LPUART_UserCallback(LPUART_Type *base, lpuart_handle_t *handle, status_t status, void *userData);
-
 /*******************************************************************************
  * Variables
  ******************************************************************************/
@@ -38,35 +37,15 @@ uint8_t g_tipString[] =
     "Lpuart interrupt example with seven data bits\r\nBoard receives 8 characters then sends them out\r\nNow please "
     "input:\r\n";
 
-uint8_t g_txBuffer[ECHO_BUFFER_LENGTH] = {0};
-uint8_t g_rxBuffer[ECHO_BUFFER_LENGTH] = {0};
-volatile bool rxBufferEmpty            = true;
-volatile bool txBufferFull             = false;
-volatile bool txOnGoing                = false;
-volatile bool rxOnGoing                = false;
-uint8_t ringBuffer[70] = "";
-int8_t ringBufferTail=0, ringBufferHead=0, lengthString;
-uint8_t string[16]={0};
+uint8_t _ringBuffer[70]="";
 
 volatile uint32_t g_systickCounter=0;
-uint32_t last_g_systickCounter=0;
-uint8_t *string1;
-
-
-lpuart_transfer_t receiveXfer;
 
     
 /*******************************************************************************
  * Code
  ******************************************************************************/
-void SysTick_Handler(void)
-{
-    if (g_systickCounter != 0xFFFFFFFF)
-    {
-        g_systickCounter++;
-    }
-    else g_systickCounter = 0;
-}
+
 
 static void delay(unsigned int time)
 {
@@ -80,41 +59,7 @@ static void delay(unsigned int time)
     }
 }
 
-bool isUpdate=0, isNewString =0;
-/* LPUART user callback */
-void LPUART_UserCallback(LPUART_Type *base, lpuart_handle_t *handle, status_t status, void *userData)
-{
-    userData = userData;
-    static uint8_t stringIndex=0;
-    if (kStatus_LPUART_TxIdle == status)
-    {
-        txBufferFull = false;
-        txOnGoing    = false;
-    }
 
-    if (kStatus_LPUART_RxIdle== status)
-    {
-        if(g_systickCounter>10)
-        {
-                  //LPUART_WriteBlocking(DEMO_LPUART, ringBuffer , sizeof(ringBuffer));
-                  stringIndex=0;
-                  for (uint8_t i= 0; i<70; i++)
-                  {
-                       ringBuffer[i] = NULL;
-                  }
-        }
-        ringBuffer[stringIndex++] = *receiveXfer.data;
-//        //stringIndex++;
-        g_systickCounter = 0;
-//        LPUART_WriteBlocking(DEMO_LPUART, receiveXfer.data , receiveXfer.dataSize);
-        LPUART_TransferReceiveNonBlocking(GSM_LPUART, &g_lpuartHandle, &receiveXfer, NULL);
-
-    }
-}
-void getString(uint8_t *_string)
-{
-    //memcpy(_string, ringBuffer, sizeof(ringBuffer));
-}
 uint32_t dem;
 /*!
  * @brief Main function
@@ -172,8 +117,7 @@ int main(void)
         {
         }
     }
-    receiveXfer.data     = g_rxBuffer;
-    receiveXfer.dataSize = 1;
+
 
     //uint8_t ch1[]= "ATE0\r\n";
     uint8_t ch1[]= "AT+CGMM\r\n";
@@ -183,7 +127,7 @@ int main(void)
     BOARD_BootClockRUN();
     CLOCK_SetIpSrc(kCLOCK_Lpuart0, kCLOCK_IpSrcSysOscAsync);
     
-    CLOCK_SetIpSrc(kCLOCK_Lpuart2, kCLOCK_IpSrcSysOscAsync);
+//    CLOCK_SetIpSrc(kCLOCK_Lpuart2, kCLOCK_IpSrcSysOscAsync);
     /*
      * config.baudRate_Bps = 115200U;
      * config.parityMode = kLPUART_ParityDisabled;
@@ -200,38 +144,29 @@ int main(void)
     config.isMsb         = false;
 
     LPUART_Init(DEMO_LPUART, &config, DEMO_LPUART_CLK_FREQ);
-    LPUART_Init(GSM_LPUART, &config, DEMO_LPUART_CLK_FREQ);
-    LPUART_TransferCreateHandle(GSM_LPUART, &g_lpuartHandle, LPUART_UserCallback, NULL);
 
-
-    txOnGoing     = true;
+    initSim800C();
     LPUART_WriteBlocking(DEMO_LPUART, g_tipString, sizeof(g_tipString) - 1);
 
-//    LPUART_WriteBlocking(GSM_LPUART, (uint8_t*) "ATE0\r\n", 6);
     delay(1000);
     LPUART_WriteBlocking(DEMO_LPUART, ch1, sizeof(ch1)-1);
-    LPUART_WriteBlocking(GSM_LPUART, ch1, sizeof(ch1)-1);
-    LPUART_TransferReceiveNonBlocking(GSM_LPUART, &g_lpuartHandle, &receiveXfer, NULL);
-//    delay(10000);
+
     while (1)
     {
-//          dem=dem +1;
-//          LPUART_ReadBlocking(DEMO_LPUART, g_txBuffer, 1);
-//          
 
-//          LPUART_WriteBlocking(GSM_LPUART, g_txBuffer, 1);
-          
-          delay(1000);
-          LPUART_WriteBlocking(DEMO_LPUART, ringBuffer, sizeof(ringBuffer)-1);
           uint8_t ch3[]= "AT+GSV\r\n";
-          LPUART_WriteBlocking(GSM_LPUART, ch3, sizeof(ch3)-1);
-          delay(1000);
-          LPUART_WriteBlocking(DEMO_LPUART, ringBuffer, sizeof(ringBuffer)-1);
+
+          SIM_SEND_COMMAND(ch3);
+          delay(20000);
+          getString(_ringBuffer);
+          LPUART_WriteBlocking(DEMO_LPUART, _ringBuffer, sizeof(_ringBuffer)-1);
           uint8_t ch2[]= "AT+CIPGSMLOC=?\r\n";
-          LPUART_WriteBlocking(GSM_LPUART, ch2, sizeof(ch2)-1);
-          delay(1000);
-          LPUART_WriteBlocking(DEMO_LPUART, ringBuffer, sizeof(ringBuffer)-1);
-          LPUART_WriteBlocking(GSM_LPUART, ch1, sizeof(ch1)-1);
+
+          SIM_SEND_COMMAND(ch2);
+          delay(20000);
+          getString(_ringBuffer);
+          LPUART_WriteBlocking(DEMO_LPUART, _ringBuffer, sizeof(_ringBuffer)-1);
+
           
     }
 }
