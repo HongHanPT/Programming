@@ -1,0 +1,8 @@
+cool.pbi: \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\DLib_Product.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\DLib_Defaults.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\yvals.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\ycheck.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\stdint.h \
+  D:\TPA\Test\UART0\ -\ Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\cool.h \
+  D:\TPA\Test\UART0\ -\ Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\cool.c

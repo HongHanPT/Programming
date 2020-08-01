@@ -1,0 +1,525 @@
+###############################################################################
+#
+# IAR ELF Linker V8.40.1.212/W32 for ARM                  31/Jul/2020  16:26:45
+# Copyright 2007-2019 IAR Systems AB.
+#
+#    Output file  =
+#        D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\lpuart_interrupt_transfer_seven_bits.out
+#    Map file     =
+#        D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\list\lpuart_interrupt_transfer_seven_bits.map
+#    Command line =
+#        -f C:\Users\hong.hd\AppData\Local\Temp\EW27E0.tmp ("D:\TPA\Test\UART0
+#        -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj\board.o"
+#        "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj\clock_config.o"
+#        "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj\cool.o"
+#        "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj\fsl_assert.o"
+#        "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj\fsl_clock.o"
+#        "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj\fsl_common.o"
+#        "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj\fsl_debug_console.o"
+#        "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj\fsl_gpio.o"
+#        "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj\fsl_lpuart.o"
+#        "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj\fsl_sim.o"
+#        "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj\fsl_smc.o"
+#        "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj\fsl_str.o"
+#        "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj\generic_list.o"
+#        "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj\interrupt_transfer_seven_bits.o"
+#        "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj\lpuart_adapter.o"
+#        "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj\pin_mux.o"
+#        "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj\serial_manager.o"
+#        "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj\serial_port_uart.o"
+#        "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj\startup_MKE15Z7.o"
+#        "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj\system_MKE15Z7.o"
+#        --redirect _Printf=_PrintfSmallNoMb --redirect _Scanf=_ScanfSmallNoMb
+#        --no_out_extension -o "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\lpuart_interrupt_transfer_seven_bits.out"
+#        --map "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\list\lpuart_interrupt_transfer_seven_bits.map"
+#        --config "D:\TPA\Test\UART0 -
+#        Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar/MKE15Z256xxx7_flash.icf"
+#        --semihosting --entry __iar_program_start --vfe --text_out locale)
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__Heap_Handler  = DLMalloc
+__SystemLibrary = DLib
+__dlib_version  = 6
+
+
+*******************************************************************************
+*** HEAP SELECTION
+***
+
+The advanced heap was selected because the application calls memory
+allocation functions outside of system library functions, and there
+are calls to deallocation functions in the application.
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A0":  place at address 0x0 { ro section .intvec };
+"P1":  place in [from 0x400 to 0x40f] { section FlashConfig };
+"P2":  place in [from 0x0 to 0x1ff] |
+                [from 0x410 to 0x3'ffff] { ro };
+define block RW { rw };
+"P3":  place in [from 0x1fff'e000 to 0x2000'5bff] { block RW };
+define block ZI { zi };
+"P4":  place in [from 0x1fff'e000 to 0x2000'5bff] { block ZI };
+define block CSTACK with size = 1K, alignment = 8 { };
+"P6":  place in [from 0x2000'5c00 to 0x2000'5fff] { block CSTACK };
+initialize by copy { rw, section .textrw };
+
+  Section            Kind         Address    Size  Object
+  -------            ----         -------    ----  ------
+"A0":                                        0xc0
+  .intvec            ro code          0x0    0xc0  startup_MKE15Z7.o [1]
+                                   - 0xc0    0xc0
+
+"P2", part 1 of 2:                           0xd8
+  .text              ro code         0xc0    0x1c  fsl_assert.o [1]
+  .text              ro code         0xdc    0x4e  ABImemset.o [3]
+  .text              ro code        0x12a     0x2  startup_MKE15Z7.o [1]
+  .text              ro code        0x12c     0x2  IntDivZer.o [3]
+  .text              ro code        0x12e     0x2  startup_MKE15Z7.o [1]
+  .text              ro code        0x130     0x2  startup_MKE15Z7.o [1]
+  .text              ro code        0x134    0x64  serial_port_uart.o [1]
+                                  - 0x198    0xd8
+
+"P1":                                        0x10
+  FlashConfig        ro code        0x400    0x10  startup_MKE15Z7.o [1]
+                                  - 0x410    0x10
+
+"P2", part 2 of 2:                         0x270c
+  .text              ro code        0x410   0xb0c  fsl_lpuart.o [1]
+  .text              ro code        0xf1c    0xe0  I32DivModFast.o [3]
+  .text              ro code        0xffc    0xf0  fsl_debug_console.o [1]
+  .text              ro code       0x10ec    0xcc  serial_manager.o [1]
+  .text              ro code       0x11b8   0x30e  fsl_str.o [1]
+  .text              ro code       0x14c8     0xe  strlen.o [3]
+  .text              ro code       0x14d6     0x2  startup_MKE15Z7.o [1]
+  .text              ro code       0x14d8    0x74  lpuart_adapter.o [1]
+  .text              ro code       0x154c   0x6dc  fsl_clock.o [1]
+  .text              ro code       0x1c28   0x264  interrupt_transfer_seven_bits.o [1]
+  .text              ro code       0x1e8c    0x80  pin_mux.o [1]
+  .text              ro code       0x1f0c   0x140  clock_config.o [1]
+  .text              ro code       0x204c   0x1e4  cool.o [1]
+  Initializer bytes  const         0x2230    0x7c  <for RW-1>
+  .rodata            const         0x22ac    0x64  fsl_debug_console.o [1]
+  .text              ro code       0x2310    0x5e  system_MKE15Z7.o [1]
+  .rodata            const         0x2370    0x54  serial_manager.o [1]
+  .rodata            const         0x23c4    0x54  serial_port_uart.o [1]
+  .rodata            const         0x2418    0x4c  clock_config.o [1]
+  .rodata            const         0x2464    0x4c  fsl_clock.o [1]
+  .rodata            const         0x24b0    0x4c  fsl_clock.o [1]
+  .rodata            const         0x24fc    0x4c  fsl_lpuart.o [1]
+  .rodata            const         0x2548    0x4c  fsl_lpuart.o [1]
+  .rodata            const         0x2594    0x4c  interrupt_transfer_seven_bits.o [1]
+  .rodata            const         0x25e0    0x4c  pin_mux.o [1]
+  .rodata            const         0x262c    0x48  lpuart_adapter.o [1]
+  .rodata            const         0x2674    0x40  fsl_lpuart.o [1]
+  .rodata            const         0x26b4    0x3c  fsl_lpuart.o [1]
+  .rodata            const         0x26f0    0x3c  pin_mux.o [1]
+  .text              ro code       0x272c    0x3c  zero_init3.o [3]
+  .text              ro code       0x2768    0x30  copy_init3.o [3]
+  .rodata            const         0x2798    0x2c  fsl_assert.o [1]
+  .rodata            const         0x27c4    0x28  fsl_lpuart.o [1]
+  .rodata            const         0x27ec    0x28  fsl_lpuart.o [1]
+  .text              ro code       0x2814    0x28  startup_MKE15Z7.o [1]
+  .text              ro code       0x283c    0x28  data_init.o [3]
+  .iar.init_table    const         0x2864    0x24  - Linker created -
+  .rodata            const         0x2888    0x20  interrupt_transfer_seven_bits.o [1]
+  .text              ro code       0x28a8    0x1e  cmain.o [3]
+  .text              ro code       0x28c6     0x4  low_level_init.o [2]
+  .text              ro code       0x28ca     0x8  exit.o [2]
+  .text              ro code       0x28d4     0xa  cexit.o [3]
+  .text              ro code       0x28e0    0x14  exit.o [4]
+  .rodata            const         0x28f4    0x1c  fsl_lpuart.o [1]
+  .rodata            const         0x2910    0x18  fsl_lpuart.o [1]
+  .rodata            const         0x2928    0x14  interrupt_transfer_seven_bits.o [1]
+  .rodata            const         0x293c    0x10  fsl_clock.o [1]
+  .rodata            const         0x294c    0x10  fsl_clock.o [1]
+  .rodata            const         0x295c    0x10  fsl_clock.o [1]
+  .rodata            const         0x296c    0x10  fsl_lpuart.o [1]
+  .rodata            const         0x297c    0x10  serial_port_uart.o [1]
+  .rodata            const         0x298c     0xc  clock_config.o [1]
+  .rodata            const         0x2998     0xc  clock_config.o [1]
+  .rodata            const         0x29a4     0xc  fsl_clock.o [1]
+  .rodata            const         0x29b0     0xc  fsl_debug_console.o [1]
+  .rodata            const         0x29bc     0xc  fsl_lpuart.o [1]
+  .rodata            const         0x29c8     0xc  fsl_lpuart.o [1]
+  .rodata            const         0x29d4     0xc  fsl_lpuart.o [1]
+  .rodata            const         0x29e0     0xc  fsl_lpuart.o [1]
+  .rodata            const         0x29ec     0xc  fsl_lpuart.o [1]
+  .rodata            const         0x29f8     0xc  fsl_lpuart.o [1]
+  .rodata            const         0x2a04     0xc  lpuart_adapter.o [1]
+  .rodata            const         0x2a10     0xc  serial_manager.o [1]
+  .text              ro code       0x2a1c     0xc  cstartup_M.o [3]
+  .rodata            const         0x2a28     0x8  clock_config.o [1]
+  .rodata            const         0x2a30     0x8  clock_config.o [1]
+  .rodata            const         0x2a38     0x8  clock_config.o [1]
+  .rodata            const         0x2a40     0x8  clock_config.o [1]
+  .rodata            const         0x2a48     0x8  fsl_clock.o [1]
+  .rodata            const         0x2a50     0x8  fsl_clock.o [1]
+  .rodata            const         0x2a58     0x8  fsl_debug_console.o [1]
+  .rodata            const         0x2a60     0x8  lpuart_adapter.o [1]
+  .rodata            const         0x2a68     0x8  lpuart_adapter.o [1]
+  .rodata            const         0x2a70     0x8  lpuart_adapter.o [1]
+  .rodata            const         0x2a78     0x8  serial_manager.o [1]
+  .rodata            const         0x2a80     0x8  serial_manager.o [1]
+  .rodata            const         0x2a88     0x8  serial_manager.o [1]
+  .rodata            const         0x2a90     0x8  serial_port_uart.o [1]
+  .rodata            const         0x2a98     0x8  serial_port_uart.o [1]
+  .text              ro code       0x2aa0     0x8  startup_MKE15Z7.o [1]
+  .text              ro code       0x2aa8     0x8  startup_MKE15Z7.o [1]
+  .text              ro code       0x2ab0     0x8  startup_MKE15Z7.o [1]
+  .text              ro code       0x2ab8     0x8  startup_MKE15Z7.o [1]
+  .text              ro code       0x2ac0     0x8  startup_MKE15Z7.o [1]
+  .text              ro code       0x2ac8     0x8  startup_MKE15Z7.o [1]
+  .text              ro code       0x2ad0     0x8  startup_MKE15Z7.o [1]
+  .text              ro code       0x2ad8     0x8  startup_MKE15Z7.o [1]
+  .text              ro code       0x2ae0     0x8  startup_MKE15Z7.o [1]
+  .text              ro code       0x2ae8     0x8  startup_MKE15Z7.o [1]
+  .text              ro code       0x2af0     0x8  startup_MKE15Z7.o [1]
+  .text              ro code       0x2af8     0x8  startup_MKE15Z7.o [1]
+  .text              ro code       0x2b00     0x8  startup_MKE15Z7.o [1]
+  .text              ro code       0x2b08     0x8  startup_MKE15Z7.o [1]
+  .rodata            const         0x2b10     0x4  clock_config.o [1]
+  .rodata            const         0x2b14     0x4  clock_config.o [1]
+  .rodata            const         0x2b18     0x4  fsl_lpuart.o [1]
+  .rodata            const         0x2b1c     0x0  zero_init3.o [3]
+  .rodata            const         0x2b1c     0x0  copy_init3.o [3]
+                                 - 0x2b1c  0x270c
+
+"P3-P4", part 1 of 2:                        0x7c
+  RW                          0x1fff'e000    0x7c  <Block>
+    RW-1                      0x1fff'e000    0x7a  <Init block>
+      .data          inited   0x1fff'e000    0x74  interrupt_transfer_seven_bits.o [1]
+      .data          inited   0x1fff'e074     0x4  system_MKE15Z7.o [1]
+      .data          inited   0x1fff'e078     0x1  cool.o [1]
+      .data          inited   0x1fff'e079     0x1  cool.o [1]
+                            - 0x1fff'e07c    0x7c
+
+"P3-P4", part 2 of 2:                        0xa0
+  ZI                          0x1fff'e07c    0xa0  <Block>
+    .bss             zero     0x1fff'e07c     0x4  cool.o [1]
+    .bss             zero     0x1fff'e080     0x4  cool.o [1]
+    .bss             zero     0x1fff'e084     0x4  fsl_clock.o [1]
+    .bss             zero     0x1fff'e088     0x4  fsl_clock.o [1]
+    .bss             zero     0x1fff'e08c    0x1c  fsl_debug_console.o [1]
+    .bss             zero     0x1fff'e0a8     0x4  fsl_debug_console.o [1]
+    .bss             zero     0x1fff'e0ac     0xc  fsl_lpuart.o [1]
+    .bss             zero     0x1fff'e0b8     0x4  fsl_lpuart.o [1]
+    .bss             zero     0x1fff'e0bc    0x30  interrupt_transfer_seven_bits.o [1]
+    .bss             zero     0x1fff'e0ec     0x8  interrupt_transfer_seven_bits.o [1]
+    .bss             zero     0x1fff'e0f4    0x20  interrupt_transfer_seven_bits.o [1]
+    .bss             zero     0x1fff'e114     0x4  interrupt_transfer_seven_bits.o [1]
+    .bss             zero     0x1fff'e118     0x1  interrupt_transfer_seven_bits.o [1]
+    .bss             zero     0x1fff'e119     0x1  interrupt_transfer_seven_bits.o [1]
+                            - 0x1fff'e11c    0xa0
+
+"P6":                                       0x400
+  CSTACK                      0x2000'5c00   0x400  <Block>
+    CSTACK           uninit   0x2000'5c00   0x400  <Block tail>
+                            - 0x2000'6000   0x400
+
+Unused ranges:
+
+         From           To      Size
+         ----           --      ----
+        0x198        0x1ff      0x68
+       0x2b1c     0x3'ffff  0x3'd4e4
+  0x1fff'e11c  0x2000'5bff    0x7ae4
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address      Size
+          -------      ----
+Zero (__iar_zero_init3)
+    1 destination range, total size 0x9e:
+          0x1fff'e07c  0x9e
+
+Copy (__iar_copy_init3)
+    1 source range, total size 0x7c (101% of destination):
+               0x2230  0x7c
+    1 destination range, total size 0x7a:
+          0x1fff'e000  0x7a
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module                           ro code  ro data  rw data
+    ------                           -------  -------  -------
+command line/config:
+    ----------------------------------------------------------
+    Total:
+
+D:\TPA\Test\UART0 - Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj: [1]
+    clock_config.o                       320      140
+    cool.o                               484        2       10
+    fsl_assert.o                          28       44
+    fsl_clock.o                        1'756      228        8
+    fsl_debug_console.o                  240      120       32
+    fsl_lpuart.o                       2'828      500       16
+    fsl_str.o                            782
+    interrupt_transfer_seven_bits.o      612      244      210
+    lpuart_adapter.o                     116      108
+    pin_mux.o                            128      136
+    serial_manager.o                     204      120
+    serial_port_uart.o                   100      116
+    startup_MKE15Z7.o                    368
+    system_MKE15Z7.o                      94        4        4
+    ----------------------------------------------------------
+    Total:                             8'060    1'762      280
+
+dl6M_tln.a: [2]
+    exit.o                                 8
+    low_level_init.o                       4
+    ----------------------------------------------------------
+    Total:                                12
+
+rt6M_tl.a: [3]
+    ABImemset.o                           78
+    I32DivModFast.o                      224
+    IntDivZer.o                            2
+    cexit.o                               10
+    cmain.o                               30
+    copy_init3.o                          48
+    cstartup_M.o                          12
+    data_init.o                           40
+    strlen.o                              14
+    zero_init3.o                          60
+    ----------------------------------------------------------
+    Total:                               518
+
+shb_l.a: [4]
+    exit.o                                20
+    ----------------------------------------------------------
+    Total:                                20
+
+    Gaps                                   8        2
+    Linker created                                 38    1'024
+--------------------------------------------------------------
+    Grand Total:                       8'618    1'802    1'304
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                       Address   Size  Type      Object
+-----                       -------   ----  ----      ------
+.iar.init_table$$Base        0x2864          --   Gb  - Linker created -
+.iar.init_table$$Limit       0x2888          --   Gb  - Linker created -
+?main                        0x28a9         Code  Gb  cmain.o [3]
+BOARD_BootClockRUN           0x1fc5   0x4a  Code  Gb  clock_config.o [1]
+BOARD_InitPins               0x1ed7   0x20  Code  Gb  pin_mux.o [1]
+CLOCK_CONFIG_FircSafeConfig
+                             0x1f57   0x6e  Code  Lc  clock_config.o [1]
+CLOCK_DeinitFirc             0x19e5   0x24  Code  Gb  fsl_clock.o [1]
+CLOCK_DeinitLpFll            0x1b5d   0x20  Code  Gb  fsl_clock.o [1]
+CLOCK_DeinitSirc             0x187d   0x1c  Code  Gb  fsl_clock.o [1]
+CLOCK_DeinitSysOsc           0x1799   0x20  Code  Gb  fsl_clock.o [1]
+CLOCK_EnableClock             0x429   0x26  Code  Lc  fsl_lpuart.o [1]
+CLOCK_EnableClock            0x1e8d   0x26  Code  Lc  pin_mux.o [1]
+CLOCK_GetCurSysClkConfig
+                             0x1f2f   0x22  Code  Lc  clock_config.o [1]
+CLOCK_GetCurSysClkConfig
+                             0x154d   0x22  Code  Lc  fsl_clock.o [1]
+CLOCK_GetErClkFreq           0x156f   0x28  Code  Gb  fsl_clock.o [1]
+CLOCK_GetFircAsyncFreq       0x1a2d   0x4a  Code  Gb  fsl_clock.o [1]
+CLOCK_GetFircFreq            0x1a09   0x20  Code  Gb  fsl_clock.o [1]
+CLOCK_GetFircFreq::fircFreq
+                             0x294c   0x10  Data  Lc  fsl_clock.o [1]
+CLOCK_GetFreq                0x15b3   0xa0  Code  Gb  fsl_clock.o [1]
+CLOCK_GetLpFllAsyncFreq
+                             0x1ba9   0x4a  Code  Gb  fsl_clock.o [1]
+CLOCK_GetLpFllFreq           0x1b7d   0x20  Code  Gb  fsl_clock.o [1]
+CLOCK_GetLpFllFreq::lpfllFreq
+                             0x295c   0x10  Data  Lc  fsl_clock.o [1]
+CLOCK_GetOsc32kClkFreq       0x1597   0x1c  Code  Gb  fsl_clock.o [1]
+CLOCK_GetSircAsyncFreq       0x18bd   0x4a  Code  Gb  fsl_clock.o [1]
+CLOCK_GetSircFreq            0x1899   0x22  Code  Gb  fsl_clock.o [1]
+CLOCK_GetSircFreq::sircFreq
+                             0x2a50    0x8  Data  Lc  fsl_clock.o [1]
+CLOCK_GetSysClkFreq          0x1675   0x60  Code  Gb  fsl_clock.o [1]
+CLOCK_GetSysOscAsyncFreq
+                             0x17e3   0x4a  Code  Gb  fsl_clock.o [1]
+CLOCK_GetSysOscFreq          0x17b9   0x2a  Code  Gb  fsl_clock.o [1]
+CLOCK_InitFirc               0x1929   0xb4  Code  Gb  fsl_clock.o [1]
+CLOCK_InitLpFll              0x1a91   0xcc  Code  Gb  fsl_clock.o [1]
+CLOCK_InitSirc               0x182d   0x50  Code  Gb  fsl_clock.o [1]
+CLOCK_InitSysOsc             0x16d5   0xbe  Code  Gb  fsl_clock.o [1]
+CLOCK_SetIpSrc               0x1ce7   0x48  Code  Lc  interrupt_transfer_seven_bits.o [1]
+CLOCK_SetRunModeSysClkConfig
+                             0x1f0d   0x22  Code  Lc  clock_config.o [1]
+CLOCK_SetXtal0Freq           0x1f51    0x6  Code  Lc  clock_config.o [1]
+CSTACK$$Base            0x2000'5c00          --   Gb  - Linker created -
+CSTACK$$Limit           0x2000'6000          --   Gb  - Linker created -
+ConvertRadixNumToString
+                             0x11b9   0xc2  Code  Lc  fsl_str.o [1]
+DbgConsole_PrintCallback
+                             0x1055   0x38  Code  Lc  fsl_debug_console.o [1]
+DbgConsole_Printf            0x1099   0x46  Code  Gb  fsl_debug_console.o [1]
+DbgConsole_SendDataReliable
+                              0xffd   0x54  Code  Gb  fsl_debug_console.o [1]
+EnableIRQ                     0x44f   0x20  Code  Lc  fsl_lpuart.o [1]
+HAL_UartSendBlocking         0x14d9   0x60  Code  Gb  lpuart_adapter.o [1]
+LPUART0_DriverIRQHandler
+                              0xeb9   0x10  Code  Gb  fsl_lpuart.o [1]
+LPUART1_DriverIRQHandler
+                              0xec9   0x10  Code  Gb  fsl_lpuart.o [1]
+LPUART2_DriverIRQHandler
+                              0xee5   0x10  Code  Gb  fsl_lpuart.o [1]
+LPUART_DisableInterrupts
+                              0x8fd   0x30  Code  Gb  fsl_lpuart.o [1]
+LPUART_EnableInterrupts
+                              0x8c9   0x30  Code  Gb  fsl_lpuart.o [1]
+LPUART_GetDefaultConfig
+                              0x845   0x66  Code  Gb  fsl_lpuart.o [1]
+LPUART_GetEnabledInterrupts
+                              0x931   0x1e  Code  Gb  fsl_lpuart.o [1]
+LPUART_GetInstance            0x481   0x30  Code  Gb  fsl_lpuart.o [1]
+LPUART_GetStatusFlags         0x955   0x10  Code  Gb  fsl_lpuart.o [1]
+LPUART_Init                   0x5bd  0x278  Code  Gb  fsl_lpuart.o [1]
+LPUART_ReadNonBlocking        0x551   0x50  Code  Lc  fsl_lpuart.o [1]
+LPUART_SoftwareReset          0x46f   0x12  Code  Lc  fsl_lpuart.o [1]
+LPUART_TransferCreateHandle
+                              0x9ad   0x80  Code  Gb  fsl_lpuart.o [1]
+LPUART_TransferGetRxRingBufferLength
+                              0x4b1   0x44  Code  Gb  fsl_lpuart.o [1]
+LPUART_TransferHandleIRQ
+                              0xbcd  0x2de  Code  Gb  fsl_lpuart.o [1]
+LPUART_TransferIsRxRingBufferFull
+                              0x4f5   0x32  Code  Lc  fsl_lpuart.o [1]
+LPUART_TransferReceiveNonBlocking
+                              0xa55  0x14c  Code  Gb  fsl_lpuart.o [1]
+LPUART_UserCallback          0x1d4b   0x40  Code  Gb  interrupt_transfer_seven_bits.o [1]
+LPUART_WriteBlocking          0x965   0x3a  Code  Gb  fsl_lpuart.o [1]
+LPUART_WriteNonBlocking
+                              0x527   0x2a  Code  Lc  fsl_lpuart.o [1]
+PORT_SetPinMux               0x1eb3   0x24  Code  Lc  pin_mux.o [1]
+RW$$Base                0x1fff'e000          --   Gb  - Linker created -
+RW$$Limit               0x1fff'e07c          --   Gb  - Linker created -
+Region$$Table$$Base          0x2864          --   Gb  - Linker created -
+Region$$Table$$Limit         0x2888          --   Gb  - Linker created -
+SerialManager_StartWriting
+                             0x10ed   0x2e  Code  Lc  serial_manager.o [1]
+SerialManager_Write          0x111b   0x66  Code  Lc  serial_manager.o [1]
+SerialManager_WriteBlocking
+                             0x11a5   0x14  Code  Gb  serial_manager.o [1]
+Serial_UartWrite              0x135   0x52  Code  Gb  serial_port_uart.o [1]
+StrFormatPrintf              0x127b  0x24c  Code  Gb  fsl_str.o [1]
+SysTick_Config               0x1cb5   0x32  Code  Lc  interrupt_transfer_seven_bits.o [1]
+SysTick_Handler              0x1d2f   0x1c  Code  Gb  interrupt_transfer_seven_bits.o [1]
+SystemCoreClock         0x1fff'e074    0x4  Data  Gb  system_MKE15Z7.o [1]
+SystemInit                   0x2311   0x3a  Code  Gb  system_MKE15Z7.o [1]
+ZI$$Base                0x1fff'e07c          --   Gb  - Linker created -
+ZI$$Limit               0x1fff'e11c          --   Gb  - Linker created -
+__NVIC_EnableIRQ              0x411   0x18  Code  Lc  fsl_lpuart.o [1]
+__NVIC_SetPriority           0x1c29   0x8c  Code  Lc  interrupt_transfer_seven_bits.o [1]
+__Vectors                       0x0          --   Gb  startup_MKE15Z7.o [1]
+__Vectors_End                  0xc0         Data  Gb  startup_MKE15Z7.o [1]
+__Vectors_Size {Abs}           0xc0          --   Gb  startup_MKE15Z7.o [1]
+__aeabi_assert                 0xc1   0x1c  Code  Gb  fsl_assert.o [1]
+__aeabi_idiv                  0xf49         Code  Gb  I32DivModFast.o [3]
+__aeabi_idiv0                 0x12d         Code  Gb  IntDivZer.o [3]
+__aeabi_idivmod               0xf49         Code  Gb  I32DivModFast.o [3]
+__aeabi_memset                 0xdd         Code  Gb  ABImemset.o [3]
+__aeabi_uidiv                 0xf4f         Code  Gb  I32DivModFast.o [3]
+__aeabi_uidivmod              0xf4f         Code  Gb  I32DivModFast.o [3]
+__cmain                      0x28a9         Code  Gb  cmain.o [3]
+__exit                       0x28e1   0x14  Code  Gb  exit.o [4]
+__iar_Memset4_word             0xfd         Code  Gb  ABImemset.o [3]
+__iar_Memset_word              0xe9         Code  Gb  ABImemset.o [3]
+__iar_copy_init3             0x2769   0x30  Code  Gb  copy_init3.o [3]
+__iar_data_init3             0x283d   0x28  Code  Gb  data_init.o [3]
+__iar_program_start          0x2a1d         Code  Gb  cstartup_M.o [3]
+__iar_zero_init3             0x272d   0x3c  Code  Gb  zero_init3.o [3]
+__low_level_init             0x28c7    0x4  Code  Gb  low_level_init.o [2]
+__vector_table                  0x0         Data  Gb  startup_MKE15Z7.o [1]
+__vector_table_0x1c            0x1c         Data  Gb  startup_MKE15Z7.o [1]
+_call_main                   0x28b5         Code  Gb  cmain.o [3]
+_exit                        0x28d5         Code  Gb  cexit.o [3]
+_main                        0x28c3         Code  Gb  cmain.o [3]
+exit                         0x28cb    0x8  Code  Gb  exit.o [2]
+g_lpuartHandle          0x1fff'e0bc   0x30  Data  Gb  interrupt_transfer_seven_bits.o [1]
+g_rxBuffer              0x1fff'e0ec    0x8  Data  Gb  interrupt_transfer_seven_bits.o [1]
+g_scgFircConfig_BOARD_BootClockRUN
+                             0x2998    0xc  Data  Gb  clock_config.o [1]
+g_scgLpFllConfig_BOARD_BootClockRUN
+                             0x2a40    0x8  Data  Gb  clock_config.o [1]
+g_scgSircConfig_BOARD_BootClockRUN
+                             0x2a38    0x8  Data  Gb  clock_config.o [1]
+g_scgSysOscConfig_BOARD_BootClockRUN
+                             0x298c    0xc  Data  Gb  clock_config.o [1]
+g_serialHandle          0x1fff'e0a8    0x4  Data  Gb  fsl_debug_console.o [1]
+g_sysClkConfig_BOARD_BootClockRUN
+                             0x2b14    0x4  Data  Gb  clock_config.o [1]
+g_timeSysTick           0x1fff'e07c    0x4  Data  Gb  cool.o [1]
+g_tipString             0x1fff'e000   0x74  Data  Gb  interrupt_transfer_seven_bits.o [1]
+g_xtal0Freq             0x1fff'e084    0x4  Data  Gb  fsl_clock.o [1]
+g_xtal32Freq            0x1fff'e088    0x4  Data  Gb  fsl_clock.o [1]
+main                         0x1d8b   0x96  Code  Gb  interrupt_transfer_seven_bits.o [1]
+p_cooling               0x1fff'e0f4   0x20  Data  Gb  interrupt_transfer_seven_bits.o [1]
+procesColling                0x204d  0x1e4  Code  Gb  cool.o [1]
+s_LpuartAdapterBase          0x2a04    0xc  Data  Lc  lpuart_adapter.o [1]
+s_debugConsoleState     0x1fff'e08c   0x1c  Data  Lc  fsl_debug_console.o [1]
+s_lpuartBases                0x29ec    0xc  Data  Lc  fsl_lpuart.o [1]
+s_lpuartClock                0x29f8    0xc  Data  Lc  fsl_lpuart.o [1]
+s_lpuartHandle          0x1fff'e0ac    0xc  Data  Lc  fsl_lpuart.o [1]
+s_lpuartIRQ                  0x2b18    0x4  Data  Lc  fsl_lpuart.o [1]
+s_lpuartIsr             0x1fff'e0b8    0x4  Data  Lc  fsl_lpuart.o [1]
+strlen                       0x14c9         Code  Gb  strlen.o [3]
+temp                    0x1fff'e078    0x1  Data  Gb  cool.o [1]
+test                    0x1fff'e114    0x4  Data  Gb  interrupt_transfer_seven_bits.o [1]
+threshold               0x1fff'e079    0x1  Data  Gb  cool.o [1]
+time_debug              0x1fff'e080    0x4  Data  Gb  cool.o [1]
+txBufferFull            0x1fff'e118    0x1  Data  Gb  interrupt_transfer_seven_bits.o [1]
+txOnGoing               0x1fff'e119    0x1  Data  Gb  interrupt_transfer_seven_bits.o [1]
+
+
+[1] = D:\TPA\Test\UART0 - Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar\debug\obj
+[2] = dl6M_tln.a
+[3] = rt6M_tl.a
+[4] = shb_l.a
+
+  8'618 bytes of readonly  code memory
+  1'802 bytes of readonly  data memory
+  1'304 bytes of readwrite data memory
+
+Errors: none
+Warnings: none

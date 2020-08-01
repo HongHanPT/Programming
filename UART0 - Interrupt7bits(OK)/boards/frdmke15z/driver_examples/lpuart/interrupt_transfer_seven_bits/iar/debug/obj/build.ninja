@@ -1,0 +1,50 @@
+#Generating source browse information for project lpuart_interrupt_transfer_seven_bits
+
+
+#Abbreviations
+cc = C$:\Program$ Files$ (x86)\IAR$ Systems\Embedded$ Workbench$ 8.3\common\bin\SourceIndexer.exe
+ll = C$:\Program$ Files$ (x86)\IAR$ Systems\Embedded$ Workbench$ 8.3\common\bin\PbdLink.exe
+bd = C$:\Program$ Files$ (x86)\IAR$ Systems\Embedded$ Workbench$ 8.3\common\bin\makeBrowseData.exe
+
+
+
+#Rules
+rule index
+  depfile = $out.dep
+  command = $cc -out=$out -f $in
+rule link
+  command = $ll -M $out $in
+rule browsedata
+  command = $bd $in -output  $out
+
+
+
+#Build steps
+build board.pbi : index board.xcl
+build clock_config.pbi : index clock_config.xcl
+build pin_mux.pbi : index pin_mux.xcl
+build generic_list.pbi : index generic_list.xcl
+build serial_manager.pbi : index serial_manager.xcl
+build serial_port_uart.pbi : index serial_port_uart.xcl
+build lpuart_adapter.pbi : index lpuart_adapter.xcl
+build system_MKE15Z7.pbi : index system_MKE15Z7.xcl
+build fsl_clock.pbi : index fsl_clock.xcl
+build fsl_common.pbi : index fsl_common.xcl
+build fsl_gpio.pbi : index fsl_gpio.xcl
+build fsl_lpuart.pbi : index fsl_lpuart.xcl
+build fsl_sim.pbi : index fsl_sim.xcl
+build fsl_smc.pbi : index fsl_smc.xcl
+build interrupt_transfer_seven_bits.pbi : index interrupt_transfer_seven_bits.xcl
+build cool.pbi : index cool.xcl
+build fsl_assert.pbi : index fsl_assert.xcl
+build fsl_debug_console.pbi : index fsl_debug_console.xcl
+build fsl_str.pbi : index fsl_str.xcl
+build lpuart_interrupt_transfer_seven_bits_part0.pbi : link board.pbi clock_config.pbi pin_mux.pbi generic_list.pbi
+build lpuart_interrupt_transfer_seven_bits_part1.pbi : link serial_manager.pbi serial_port_uart.pbi lpuart_adapter.pbi system_MKE15Z7.pbi
+build lpuart_interrupt_transfer_seven_bits_part2.pbi : link fsl_clock.pbi fsl_common.pbi fsl_gpio.pbi fsl_lpuart.pbi
+build lpuart_interrupt_transfer_seven_bits_part3.pbi : link fsl_sim.pbi fsl_smc.pbi interrupt_transfer_seven_bits.pbi cool.pbi
+build lpuart_interrupt_transfer_seven_bits_part4.pbi : link fsl_assert.pbi fsl_debug_console.pbi fsl_str.pbi
+build lpuart_interrupt_transfer_seven_bits.pbd : link lpuart_interrupt_transfer_seven_bits_part0.pbi lpuart_interrupt_transfer_seven_bits_part1.pbi lpuart_interrupt_transfer_seven_bits_part2.pbi lpuart_interrupt_transfer_seven_bits_part3.pbi lpuart_interrupt_transfer_seven_bits_part4.pbi
+build lpuart_interrupt_transfer_seven_bits.pbw : browsedata lpuart_interrupt_transfer_seven_bits.pbd
+
+

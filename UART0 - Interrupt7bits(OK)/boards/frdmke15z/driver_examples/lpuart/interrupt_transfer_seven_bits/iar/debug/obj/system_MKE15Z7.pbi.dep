@@ -1,0 +1,17 @@
+system_MKE15Z7.pbi: \
+  D:\TPA\Test\UART0\ -\ Interrupt7bits(OK)\devices\MKE15Z7\system_MKE15Z7.c \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\stdint.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\ycheck.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\yvals.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\DLib_Defaults.h \
+  C:\\Program\ Files\ (x86)\\IAR\ Systems\\Embedded\ Workbench\ 8.3\\arm\\inc\\c\\DLib_Config_Normal.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\DLib_Product.h \
+  D:\TPA\Test\UART0\ -\ Interrupt7bits(OK)\devices\MKE15Z7/fsl_device_registers.h \
+  D:\TPA\Test\UART0\ -\ Interrupt7bits(OK)\devices\MKE15Z7/MKE15Z7.h \
+  D:\TPA\Test\UART0\ -\ Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar/../../../../../../CMSIS/Include\core_cm0plus.h \
+  D:\TPA\Test\UART0\ -\ Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar/../../../../../../CMSIS/Include/cmsis_version.h \
+  D:\TPA\Test\UART0\ -\ Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar/../../../../../../CMSIS/Include/cmsis_compiler.h \
+  D:\TPA\Test\UART0\ -\ Interrupt7bits(OK)\boards\frdmke15z\driver_examples\lpuart\interrupt_transfer_seven_bits\iar/../../../../../../CMSIS/Include\cmsis_iccarm.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\iccarm_builtin.h \
+  D:\TPA\Test\UART0\ -\ Interrupt7bits(OK)\devices\MKE15Z7/system_MKE15Z7.h \
+  D:\TPA\Test\UART0\ -\ Interrupt7bits(OK)\devices\MKE15Z7/MKE15Z7_features.h
