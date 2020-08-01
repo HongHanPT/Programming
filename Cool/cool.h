@@ -1,5 +1,5 @@
 /** @file    cool.c
-  * @version 0.1
+  * @version 1.0
   * @author  HongHan
   * @brief   Library for ARM process cooler. 
   *          This file provides firmware functions to process cooler.
@@ -38,11 +38,11 @@
  * @defgroup  Function code 
  * @brief     Function code of request master
  */
-#define THREE_MIN 		180000
-#define EIGHT_MIN 		480000
-#define TWELVE_MIN 		720000
-#define FIFTEEN_MIN             900000
-#define FIFTEEN_SEC             15000
+#define THREE_MIN 		18000
+#define EIGHT_MIN 		48000
+#define TWELVE_MIN 		72000
+#define FIFTEEN_MIN             90000
+#define FIFTEEN_SEC             5000
 
 /*********************************************************************************
  * MACRO
@@ -62,8 +62,7 @@
   * @brief  States of Cooler Sytem
   */  
 typedef enum{
-	IDLE =0,
-	START,
+	START=0,
 	COOLER_SYSTEM_TURN_ON,
 	COOLER_SYSTEM_TURN_OFF,
 }state_cooling_t;
@@ -94,7 +93,6 @@ typedef enum{
   */  
 typedef struct{
 	state_cooling_t state;
-	state_run_over_time_t runOverTimeState;
 	uint32_t timeStart;
 	uint32_t timeOn;
 	uint32_t timeOff;
@@ -105,16 +103,13 @@ typedef struct{
 	state_time_t timeOffState;
 	state_time_t timeRunOverState;
         state_time_t timeVetifyState;
+        state_run_over_time_t runOverTimeState;
 	state_cooling_machine_sytems_t fanState;
 	state_cooling_machine_sytems_t coolerState;
 	
 }cooling_t;
 
- /*********************************************************************************
- * VARIABLE
- */
-cooling_t *p_cooling;
-uint32_t g_timeSysTick;
-uint8_t temp, threshold;
+void getTem(uint8_t *_temp, uint32_t *_g_Tick);
+void procesColling(cooling_t *p_cooling);
 
 #endif /* __COOLING_H__ */
