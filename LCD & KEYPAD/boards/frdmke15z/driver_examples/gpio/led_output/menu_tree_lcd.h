@@ -30,7 +30,7 @@
  
 #define SIGNAL_ENTER					(*signalEnter)
 #define SIGNAL_UP				        (*signalUp)
-#define SIGNAL_DOWN						(*signalDown)
+#define SIGNAL_DOWN					(*signalDown)
 #define SIGNAL_CANCEL					(*signalCancel)
 #define MAX_SHOWED_MENU					(*maxShowedMenu)
 

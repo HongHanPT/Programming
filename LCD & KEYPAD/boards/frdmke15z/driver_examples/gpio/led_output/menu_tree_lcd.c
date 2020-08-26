@@ -131,10 +131,10 @@ void MENU_SetMaxShowedMenu(char _maxShowedMenu)
  * @brief    Initializes Signals to Control Menu Tree
  * @note
  * 
- * @param    _signalEnter	Signal to select menu
- * @param    _signalUp		Signal to roll up menu
- * @param    _signalDown	Signal to roll down menu
- * @param    _signalCacel	Signal to back previous menu
+ * @param    _signalEnter	Signal to select menu, value defined from file. h
+ * @param    _signalUp		Signal to roll up menu, value defined from file. h
+ * @param    _signalDown	Signal to roll down menu, value defined from file. h
+ * @param    _signalCacel	Signal to back previous menu, value defined from file. h
  * @retval   None
  */
 void MENU_InitSignalControl(char *_signalEnter, char *_signalUp, char *_signalDown, char *_signalCacel)
@@ -154,8 +154,10 @@ void MENU_InitSignalControl(char *_signalEnter, char *_signalUp, char *_signalDo
  * @param    isUpdateBrowse
  * @retval   None
  */
+
 void MENU_BrowseMenu(MenuItem_t *rootMenu, update_browse_t isUpdateBrowse)
 {
+  #ifdef LANGUAGE_ENGLISH
   if((root==NULL)|| (isUpdateBrowse == YES_UPDATE)) 
   {
       root = rootMenu;
@@ -252,8 +254,11 @@ void MENU_BrowseMenu(MenuItem_t *rootMenu, update_browse_t isUpdateBrowse)
       arrowPos =1;
   }
   MENU_ShowMenu();
-  
+#else
+
+#endif
 }
+
 
 /**
  * @brief    Add SubMenu to Menu

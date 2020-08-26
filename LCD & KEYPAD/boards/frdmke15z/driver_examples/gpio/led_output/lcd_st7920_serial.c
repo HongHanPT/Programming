@@ -29,18 +29,18 @@ uint8_t startRow, startCol, endRow, endCol; // coordinates of the dirty rectangl
 graphic_state_t graphicCheck = DISABLE;
 uint8_t image[(128 * 64)/8];
 //static lcd_pins_t *lcdPins;
-
-
+extern const uint8_t g_vnfont_8x15[];
+extern uint16_t g_vnfontFindPosition(uint16_t c);
 /*********************************************************************************
  * EXPORTED FUNCTION
  */
-
+static void LCD_Update(void);
 static void delay(unsigned int time)
 {
     volatile uint32_t i = 0;
     for (unsigned int cnt = 0; cnt<=time;cnt++)
     {
-      for (i = 0; i < 100; ++i)
+      for (i = 0; i < 20; ++i)
       {
           __asm("NOP"); /* delay */
       }
@@ -167,21 +167,21 @@ void LCD_GraphicMode(graphic_state_t state)
 {
 	if (state == ENABLE)
 	{
-		// ST7920_SendCmd(0x30);  // 8 bit mode
-		// HAL_Delay (1);
-		// ST7920_SendCmd(0x34);  // switch to Extended instructions
-		// HAL_Delay (1);
-		LCD_SendCmd(0x3E);  // enable graphics
-		delay(10);
+		LCD_SendCmd(0x30);  // 8 bit mode
+		delay (1);
+		LCD_SendCmd(0x34);  // switch to Extended instructions
+		delay (1);
+		LCD_SendCmd(0x36);  // enable graphics
+		delay(30);
 		graphicCheck = ENABLE;  // update the variable
 	}
 
 	else if (state == DISABLE)
 	{
-                LCD_SendCmd(0x3E);
-                delay(1);
+//                LCD_SendCmd(0x3E);
+//                delay(1);
 		LCD_SendCmd(0x30);  // 8 bit mode
-		delay(1);
+		delay(5);
 		graphicCheck = DISABLE;  // update the variable
 	}
 }
@@ -199,25 +199,12 @@ void LCD_Clear()
 	}
 	else if (graphicCheck == ENABLE)
 	{
-		uint8_t x, y;
-		for(y = 0; y < 64; y++)
-		{
-				if(y < 32)
-				{
-						LCD_SendCmd(0x80 | y);
-						LCD_SendCmd(0x80);
-				}
-				else
-				{
-						LCD_SendCmd(0x80 | (y-32));
-						LCD_SendCmd(0x88);
-				}
-				for(x = 0; x < 8; x++)
-				{
-						LCD_SendData(0);
-						LCD_SendData(0);
-				}
-		}
+                for(uint16_t i=0;  i < (128 * 64)/8; i++)
+                {
+                  image[i]=0x00;
+                  //memset
+                }
+                LCD_Update();
 	}
 }
 
@@ -268,7 +255,94 @@ void LCD_Update(void)
     LCD_DrawBitmap(image);
 }
 
+void LCD_SetFont(sFONT *fonts)
+{
 
+}
+
+
+/**
+ * @brief    Write to RAM
+ * @note     Xpos < 128
+             Ypos < 64
+ * 
+ * @param    Xpos, Yos Coordinate to draw char
+ * @retval   None
+ */
+void LCD_DrawChar(uint16_t Xpos, uint16_t Ypos, uint8_t width, uint8_t *c)
+{
+  uint16_t _Xpos = Xpos, _Ypos = Ypos-1;
+  uint8_t value;
+	for (uint8_t _py = 0; _py < 8; _py++)  //Dong thu py
+        {
+          for (uint8_t i=0; i< width; i++)
+          {
+            value = ((c[i])>> _py)&0x01;  //Lay lan luot gia tri bit o cot i, tren dong py
+            _Xpos= Xpos + i;
+            if(value){
+              setBit(image, _Xpos, _Ypos);}
+            else clearBit(image, _Xpos, _Ypos);
+            
+            value = ((uint8_t)(c[i+width])>>_py)&0x01;  //Lay lan luot gia tri bit o cot i, tren dong py
+            if(value){
+              setBit(image, _Xpos, _Ypos+8);}
+            else clearBit(image, _Xpos, _Ypos+8);
+            
+          }
+          _Ypos++;
+        }
+ // LCD_Update();
+}
+
+/**
+ * @brief    Write to RAM
+ * @note     Line<4 
+ * @param    
+ * @retval   None
+ */
+void LCD_DisplayStringLine(uint8_t Line, uint8_t *ptr)
+{
+    unsigned char index = 0;
+    uint16_t postionChar=0;
+    uint8_t widthChar=0;
+    uint16_t _Xpos = 1, _Ypos = (Line-1)*16+1;
+//    uint8_t *tempArray=ptr;
+    while(ptr[index])
+    {
+      postionChar = g_vnfontFindPosition(*ptr);
+      widthChar = g_vnfont_8x15[postionChar];
+//      for(uint8_t index=0; index < 2*widthChar; index++)
+//      {
+//        *(tempArray+index) =1;
+//        //*(tempArray+index) = *(g_vnfont_8x15 + postionChar + 1+ index);
+//      }
+      LCD_DrawChar(_Xpos, _Ypos, widthChar, (uint8_t*)g_vnfont_8x15+postionChar+1);
+      _Xpos += widthChar+1;
+      ptr++;
+    }
+    LCD_Update();
+}
+void LCD_DisplayStringLineWithPosition(uint16_t Line, uint16_t ColPos, uint8_t *ptr)
+{
+    unsigned char index = 0;
+    uint8_t *tempArray;
+    uint16_t postionChar;
+    uint8_t widthChar;
+    uint16_t _Xpos = ColPos, _Ypos = (Line-1)*16+1;
+    while(ptr[index])
+    {
+      postionChar = g_vnfontFindPosition(*ptr);
+      widthChar = g_vnfont_8x15[postionChar];
+      for(uint8_t index=0; index < 2*widthChar; index++)
+      {
+        *(tempArray + index) = g_vnfont_8x15[postionChar + 1+ index];
+      }
+      LCD_DrawChar(_Xpos, _Ypos, widthChar, tempArray);
+      _Xpos += widthChar;
+      ptr++;
+    }
+    LCD_Update();
+}
 
 // Initialize the display
 //void LCD_Init (lcd_pins_t *_lcdPins)
@@ -311,23 +385,23 @@ void LCD_SelectLine(unsigned char line)
 void LCD_SetPos(unsigned int x, int y)
 {
   int instruction =0;
-  if (y>8) y=8;
-  if (x>4) x=4;
-  if (x == 1)
+  if (x>8) x=8;
+  if (y>4) y=4;
+  if (y == 1)
   {
-      instruction = 128 + y;
+      instruction = 128 + x;
   }
-  else if (x==2)
+  else if (y==2)
   {
-      instruction = 144 +y;
+      instruction = 144 +x;
   }
-  else if (x==3)
+  else if (y==3)
   {
-      instruction = 136 +y;
+      instruction = 136 +x;
   }
   else 
   {
-      instruction = 152 +y;
+      instruction = 152 +x;
   }
   LCD_SendCmd(instruction);
 }

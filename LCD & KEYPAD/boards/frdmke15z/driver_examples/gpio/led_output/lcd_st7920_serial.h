@@ -33,6 +33,11 @@
 #define LCD_DATA_PIN                   15U//                lcdPins->pinDATA->pin
 #define LCD_CLK_PIN                    13U//               lcdPins->pinCLK->pin
 
+#define LCD_PIXEL_WIDTH                128
+
+#define setBit(data, posX, posY)       (data[(posX)/8+(posY)*16]|=(1<<(7-(posX)%8)))
+#define clearBit(data, posX, posY)      (data[(posX)/8+(posY)*16]&=~(1<<(7-(posX)%8)))
+//#define getBit
 /*********************************************************************************
  * TYPEDEFS
  */
@@ -53,6 +58,17 @@ typedef enum{
 	ENABLE = 1,                                         /*!<                       */
 }graphic_state_t;
 
+
+typedef struct _tFont
+{    
+  const uint32_t *table;
+  uint16_t Width;
+  uint16_t Height;
+} sFONT;
+typedef struct  {
+    uint32_t Value[32];                         //!< Raw data
+    uint8_t Size;                               //!< Size of data
+} FontVnSymbol_t;
 /*********************************************************************************
  * EXPORTED FUNCTION
  */
@@ -76,6 +92,17 @@ void LCD_Clear();
 
 // Draw bitmap on the display
 void LCD_DrawBitmap(const unsigned char* graphic);
+
+void LCD_DrawChar(uint16_t Xpos, uint16_t Ypos, uint8_t width, uint8_t *c);
+void LCD_DrawVnChar(uint16_t Xpos, uint16_t Ypos, const FontVnSymbol_t *c, uint8_t width);
+
+void LCD_DisplayChar(uint16_t Line, uint16_t Column, uint8_t Ascii);
+void LCD_DisplayVnChar(uint16_t Line, uint16_t Column, uint8_t Ascii, uint8_t width);
+
+void LCD_SetFont(sFONT *fonts);
+//void LCD_SetVNFont(VnTimeFONT *fonts);
+void LCD_DisplayStringLine(uint8_t Line, uint8_t *ptr);
+void LCD_DisplayStringLineWithPosition(uint16_t Line, uint16_t ColPos, uint8_t *ptr);
 
 // Update the display with the selected graphics
 void LCD_Update(void);
