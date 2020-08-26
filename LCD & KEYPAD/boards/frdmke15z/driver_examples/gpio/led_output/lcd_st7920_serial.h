@@ -101,7 +101,7 @@ void LCD_DisplayVnChar(uint16_t Line, uint16_t Column, uint8_t Ascii, uint8_t wi
 
 void LCD_SetFont(sFONT *fonts);
 //void LCD_SetVNFont(VnTimeFONT *fonts);
-void LCD_DisplayStringLine(uint8_t Line, uint8_t *ptr);
+void LCD_DisplayStringLine(uint8_t Line, uint16_t *ptr);
 void LCD_DisplayStringLineWithPosition(uint16_t Line, uint16_t ColPos, uint8_t *ptr);
 
 // Update the display with the selected graphics

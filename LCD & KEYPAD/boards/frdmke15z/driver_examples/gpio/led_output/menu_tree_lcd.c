@@ -290,3 +290,63 @@ void MENU_AddSubMenu2Menu(MenuItem_t *root1, MenuItem_t *child1)
   root1->size ++;
 
 }
+
+
+//
+void MENU_Process(void)
+  {
+  LCD_Clear();
+ /*Xoa bo mui ten */
+//  for(unsigned char i=1; i<=maxShowedMenu; i++)
+//   {
+//      LCD_SelectLine(i);
+//      LCD_SendData(' ');
+//   }
+  
+  if(root->child!=NULL)
+  {
+      MenuItem_t *cusor1;
+      cusor1 = root->child;
+      char i;
+      if (menuPos-arrowPos +1 ==1) 
+      {
+
+          //LCD_SetPos(1,1);
+          LCD_SelectLine(1);
+          LCD_SendData(' ');
+          LCD_DisplayStringLine(2, (uint16_t*)u"HELLO\x1EAA");
+          LCD_SendString(cusor1->name);
+          cusor1 = cusor1->brother;
+          i=1;
+      }
+      else
+      {
+          for(char i =1; i< menuPos-arrowPos +1;i++)
+          {
+            cusor1 = cusor1 -> brother; 
+          }
+          i=0;
+      }
+      while(cusor1!= NULL&& i< maxShowedMenu)
+      {    
+          i++;
+          //LCD_SetPos(i,1);
+          LCD_SelectLine(i);
+          LCD_SendString("                ");
+          //LCD_SetPos(i,1);
+          LCD_SelectLine(i);
+          LCD_SendData(' ');
+          LCD_SendString(cusor1->name);//Lan luot hien ten cua M sub_menu from (vi tri hien tai - vi tri mui ten)
+          cusor1 = cusor1->brother;
+      }
+      i++;
+      //Hien thi mui ten
+      LCD_SelectLine(arrowPos);
+      LCD_SendData(0x1A);
+      for (char j=i; j<=maxShowedMenu;j++)   //Xoa nhung dong k dung den
+      {
+          LCD_SelectLine(j);
+          LCD_SendString("                ");
+      }
+  }
+}

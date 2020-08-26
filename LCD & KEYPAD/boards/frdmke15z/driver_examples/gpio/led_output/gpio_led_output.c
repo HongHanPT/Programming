@@ -410,7 +410,7 @@ button_t buttonA =
   .fnCallbackHOLD = eventHoldA,
 };
     
-
+extern const uint8_t g_vnfont_8x15[];
 int main(void)
 {
     /* Define the init structure for the output LED pin*/
@@ -448,6 +448,7 @@ int main(void)
     GPIO_PinInit(GPIOD, 7U, &in_config);        /*Row3 button*/
     GPIO_PinInit(GPIOD, 5U, &in_config);        /*Row4 button*/
     
+    
 //    lcd_pins_t LCD_PINS;
 //    //LCD_PINS.pinCS -> port  = GPIOD;              
 //    //LCD_PINS.pinCS ->pin    = 14U;
@@ -476,8 +477,11 @@ int main(void)
 //    {.pinCS = {.port = GPIOD, .pin= 14U}, .pinDATA = {.port = GPIOD, .pin = 15U}, .pinCLK = {.port = GPIOD, .pin = 13}};
     LCD_Init();
     //KEYPAD_Init();
-    LCD_GraphicMode(DISABLE);
-    LCD_SendData(0x1A);
+//    LCD_GraphicMode(DISABLE);
+//    LCD_SendData(0x1A);
+
+//    delay(20);
+    LCD_GraphicMode(ENABLE);
     LCD_Clear();
     MENU_AddSubMenu2Menu(&Main, &Menu1);
     MENU_AddSubMenu2Menu(&Main, &Menu2);
@@ -521,18 +525,22 @@ int main(void)
         {
         }
     }
-
-    MENU_BrowseMenu(&Main, YES_UPDATE);
-//    LCD_DrawCircle(30, 30, 20);
-//    LCD_Update();
-    while (1)
-    {
-        //CLEAR();
-       delay(100);
-       buttonA.keyButton = 0;
-       buttonA.keyButton = KEYPAD_CheckKey(); 
-       KEYPAD_ProcessButtonEvent(&buttonA);
-    }
+//    LCD_DrawChar(20, 3, 6, (uint8_t*)g_vnfont_8x15+0+1);
+    LCD_DisplayStringLine(2, (uint16_t*)u"HELLO\x1EAA");
+    
+    LCD_DisplayStringLine(3, (uint16_t*)u"TEST_LCD");
+    LCD_Update();
+//    MENU_BrowseMenu(&Main, YES_UPDATE);
+////    LCD_DrawCircle(30, 30, 20);
+////    LCD_Update();
+//    while (1)
+//    {
+//        //CLEAR();
+////       delay(100);
+//       buttonA.keyButton = 0;
+//       buttonA.keyButton = KEYPAD_CheckKey(); 
+//       KEYPAD_ProcessButtonEvent(&buttonA);        
+//    }
 }
 
 void eventPressA(unsigned char key)

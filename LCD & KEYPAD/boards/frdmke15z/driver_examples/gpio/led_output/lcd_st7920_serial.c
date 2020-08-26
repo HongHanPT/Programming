@@ -34,7 +34,7 @@ extern uint16_t g_vnfontFindPosition(uint16_t c);
 /*********************************************************************************
  * EXPORTED FUNCTION
  */
-static void LCD_Update(void);
+
 static void delay(unsigned int time)
 {
     volatile uint32_t i = 0;
@@ -171,7 +171,7 @@ void LCD_GraphicMode(graphic_state_t state)
 		delay (1);
 		LCD_SendCmd(0x34);  // switch to Extended instructions
 		delay (1);
-		LCD_SendCmd(0x36);  // enable graphics
+		LCD_SendCmd(0x3E);  // enable graphics
 		delay(30);
 		graphicCheck = ENABLE;  // update the variable
 	}
@@ -196,6 +196,7 @@ void LCD_Clear()
 	if (graphicCheck == DISABLE)
 	{
 		LCD_SendCmd(0x01);
+                delay(100);
 	}
 	else if (graphicCheck == ENABLE)
 	{
@@ -205,7 +206,9 @@ void LCD_Clear()
                   //memset
                 }
                 LCD_Update();
+                
 	}
+        
 }
 
 
@@ -224,11 +227,12 @@ void LCD_DrawBitmap(const unsigned char* graphic)
 		{
 			for(x = 0; x < 8; x++)				// Draws top half of the screen.
 			{					        // In extended instruction mode, vertical and horizontal coordinates must be specified before sending data in.
-				LCD_SendCmd(0x80 | y);			// Vertical coordinate of the screen is specified first. (0-31)
-				LCD_SendCmd(0x80 | x);			// Then horizontal coordinate of the screen is specified. (0-8)
+				LCD_SendCmd(0x80|y);			// Vertical coordinate of the screen is specified first. (0-31)
+				LCD_SendCmd(0x80|x);			// Then horizontal coordinate of the screen is specified. (0-8)
 				LCD_SendData(graphic[2*x + 16*y]);		// Data to the upper byte is sent to the coordinate.
 				LCD_SendData(graphic[2*x+1 + 16*y]);	// Data to the lower byte is sent to the coordinate.
 			}
+                        //delay(5);
 		}
 		else
 		{
@@ -239,6 +243,7 @@ void LCD_DrawBitmap(const unsigned char* graphic)
 				LCD_SendData(graphic[2*x + 16*y]);
 				LCD_SendData(graphic[2*x+1 + 16*y]);
 			}
+                        //delay(5);
 		}
 	}
 }
@@ -300,7 +305,7 @@ void LCD_DrawChar(uint16_t Xpos, uint16_t Ypos, uint8_t width, uint8_t *c)
  * @param    
  * @retval   None
  */
-void LCD_DisplayStringLine(uint8_t Line, uint8_t *ptr)
+void LCD_DisplayStringLine(uint8_t Line, uint16_t *ptr)
 {
     unsigned char index = 0;
     uint16_t postionChar=0;
@@ -320,7 +325,8 @@ void LCD_DisplayStringLine(uint8_t Line, uint8_t *ptr)
       _Xpos += widthChar+1;
       ptr++;
     }
-    LCD_Update();
+   // LCD_Update();
+    //delay(1000);
 }
 void LCD_DisplayStringLineWithPosition(uint16_t Line, uint16_t ColPos, uint8_t *ptr)
 {
